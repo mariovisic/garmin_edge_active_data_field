@@ -4,6 +4,7 @@ using Toybox.Lang;
 
 class ActiveDataFieldView extends Ui.DataField
 {
+  hidden var calculator = new ActiveDataFieldCalculator();
   hidden var heartRateValue;
   hidden var currentSpeedValue;
   hidden var historicalSpeedValues = new [0];
@@ -14,20 +15,8 @@ class ActiveDataFieldView extends Ui.DataField
   }
 
   function compute(info) {
-    if (info has :currentSpeed) {
-          if (info.currentSpeed != null) {
-            currentSpeedValue = info.currentSpeed * 3.6;
-            historicalSpeedValues.add(currentSpeedValue);
-            historicalSpeedValues = historicalSpeedValues.slice(-5, null);
-            System.print("speeds: ");
-            System.println(historicalSpeedValues);
+    calculator.logInfo(info);
 
-            //System.println(Lang.format("currentSpeed $1", ["cats"]));
-          }
-    }
-
-
-    
     if (info has :currentHeartRate) {
       if (info.currentHeartRate != null) {
           heartRateValue = info.currentHeartRate;
