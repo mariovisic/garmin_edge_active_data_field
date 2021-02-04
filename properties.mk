@@ -1,4 +1,4 @@
-DEVICE = fenix5s
-SDK_HOME = /Users/daniel.siwiec/connectiq-sdk-mac-3.0.4
-DEPLOY = /Volumes/GARMIN/GARMIN/APPS/
-PRIVATE_KEY = /Users/daniel.siwiec/.ssh/id_rsa_garmin.der
+DEVICE = edge_520
+SDK_HOME = /Users/mario/Library/Application\ Support/Garmin/ConnectIQ/Sdks/connectiq-sdk
+DEPLOY = /Users/mario/Desktop
+PRIVATE_KEY = /Users/mario/.ssh/garmin.der
