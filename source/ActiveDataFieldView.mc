@@ -5,25 +5,13 @@ using Toybox.Lang;
 class ActiveDataFieldView extends Ui.DataField
 {
   hidden var calculator = new ActiveDataFieldCalculator();
-  hidden var heartRateValue;
-  hidden var currentSpeedValue;
-  hidden var historicalSpeedValues = new [0];
 
   function initialize() {
     DataField.initialize();
-    heartRateValue = 0.0f;
   }
 
   function compute(info) {
     calculator.logInfo(info);
-
-    if (info has :currentHeartRate) {
-      if (info.currentHeartRate != null) {
-          heartRateValue = info.currentHeartRate;
-      } else {
-          heartRateValue = 0.0f;
-      }
-    }
   }
 
   function onUpdate(dc) {
@@ -34,7 +22,7 @@ class ActiveDataFieldView extends Ui.DataField
         (dc.getWidth() / 9) * 2.5,                      // gets the width of the device and divides by 2
         (dc.getHeight() / 6) * 2.5,                     // gets the height of the device and divides by 2
         Graphics.FONT_LARGE,                    // sets the font size
-        heartRateValue,                          // the String to display
+        calculator.getLatestValue("heartRate"),                          // the String to display
         Graphics.TEXT_JUSTIFY_CENTER            // sets the justification for the text
                 );
 

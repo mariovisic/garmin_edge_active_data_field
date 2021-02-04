@@ -1,24 +1,33 @@
 using Toybox.System;
 
 class ActiveDataFieldCalculator {
-  var historicalValues = {
-    "speed" => new [5],
+  hidden var historicalValues = {
     "altitude" => new [5],
+    "heartRate" => new [5],
+    "power" => new [5],
+    "speed" => new [5],
   };
 
 	function initialize() {}
 
   function logInfo(info) {
-    logSpeed(info.currentSpeed);
+    logValue("altitude", info.altitude, 5);
+    logValue("heartRate", info.currentHeartRate, 5);
+    logValue("power", info.currentPower, 5);
+    logValue("speed", info.currentSpeed, 5);
 
-    System.print("speeds: ");
-    System.println(historicalValues.get("speed"));
+    // TODO: Remove on release
+    System.print("values: ");
+    System.println(historicalValues);
   }
 
-  function logSpeed(currentSpeed) {
-    if (currentSpeed != null) {
-      historicalValues.get("speed").add(currentSpeed * 3.6);
-      historicalValues.put("speed", historicalValues.get("speed").slice(-5, null));
+  hidden function logValue(name, value, numValuesToKeep) {
+    if (value != null) {
+      historicalValues.get(name).add(value);
+      historicalValues.put(name, historicalValues.get(name).slice(-numValuesToKeep, null));
     }
+  }
+  function getLatestValue(name) {
+    return historicalValues.get(name).slice(-1, null)[0];
   }
 }
