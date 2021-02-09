@@ -15,10 +15,6 @@ class ActiveDataFieldCalculator {
     logValue("heartRate", info.currentHeartRate, 5);
     logValue("power", info.currentPower, 5);
     logValue("speed", info.currentSpeed, 5);
-
-    // TODO: Remove on release
-    System.print("values: ");
-    System.println(historicalValues);
   }
 
   hidden function logValue(name, value, numValuesToKeep) {

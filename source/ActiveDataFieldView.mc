@@ -4,6 +4,7 @@ using Toybox.Lang;
 
 class ActiveDataFieldView extends Ui.DataField
 {
+  hidden var batteryPercentage;
   hidden var calculator = new ActiveDataFieldCalculator();
 
   function initialize() {
@@ -11,40 +12,48 @@ class ActiveDataFieldView extends Ui.DataField
   }
 
   function compute(info) {
+    batteryPercentage = System.getSystemStats().battery;
     calculator.logInfo(info);
   }
 
   function onUpdate(dc) {
-    dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_TRANSPARENT);
-
-       
-    dc.drawText(
-        (dc.getWidth() / 9) * 2.5,                      // gets the width of the device and divides by 2
-        (dc.getHeight() / 6) * 2.5,                     // gets the height of the device and divides by 2
-        Graphics.FONT_LARGE,                    // sets the font size
-        calculator.getLatestValue("heartRate"),                          // the String to display
-        Graphics.TEXT_JUSTIFY_CENTER            // sets the justification for the text
-                );
-
+    new BatteryPercentageIndicator().draw(dc, batteryPercentage);
 
     dc.setPenWidth(2);
 
+    dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
+    dc.drawText(
+      ((dc.getWidth() / 18) * 4.5) + 2,
+      ((dc.getHeight() / 6) * 1) + 2,
+      Graphics.FONT_LARGE,
+      calculator.getLatestValue("heartRate"),
+      Graphics.TEXT_JUSTIFY_CENTER
+    );
+
+    dc.drawText(
+      ((dc.getWidth() / 18) * 13.5) + 2,
+      ((dc.getHeight() / 6) * 1) + 2,
+      Graphics.FONT_LARGE,
+      (calculator.getLatestValue("speed") * 3.6).format("%.0f"),
+      Graphics.TEXT_JUSTIFY_CENTER
+    );
+
+    dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_TRANSPARENT);
     dc.drawRoundedRectangle(
-      (dc.getWidth() / 9) * 1,
-      (dc.getHeight() / 6) * 2,
-      (dc.getWidth() / 9) * 3,
+      ((dc.getWidth() / 18) * 1) - 4,
+      (dc.getHeight() / 6) * 1,
+      (dc.getWidth() / 18) * 8,
       (dc.getHeight() / 6),
       4
     );
 
+    dc.setColor(Graphics.COLOR_BLUE, Graphics.COLOR_TRANSPARENT);
     dc.drawRoundedRectangle(
-      (dc.getWidth() / 9) * 5,
-      (dc.getHeight() / 6) * 2,
-      (dc.getWidth() / 9) * 3,
+      ((dc.getWidth() / 18) * 10) - 4,
+      (dc.getHeight() / 6) * 1,
+      (dc.getWidth() / 18) * 8,
       (dc.getHeight() / 6),
       4
     );
-
-    // View.onUpdate(dc);
   }
 }
