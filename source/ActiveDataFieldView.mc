@@ -29,7 +29,7 @@ class ActiveDataFieldView extends Ui.DataField
       ((dc.getWidth() / 18) * 4.5) + 2,
       ((dc.getHeight() / 6) * 1) + 2,
       Graphics.FONT_LARGE,
-      calculator.getLatestValue("heartRate"),
+      calculator.getLatestFormattedValue("heartRate", "%d"),
       Graphics.TEXT_JUSTIFY_CENTER
     );
 
@@ -37,7 +37,15 @@ class ActiveDataFieldView extends Ui.DataField
       ((dc.getWidth() / 18) * 13.5) + 2,
       ((dc.getHeight() / 6) * 1) + 2,
       Graphics.FONT_LARGE,
-      (calculator.getLatestValue("speed") * 3.6).format("%.0f"),
+      calculator.getLatestFormattedValue("speed", "%d"),
+      Graphics.TEXT_JUSTIFY_CENTER
+    );
+
+    dc.drawText(
+      (dc.getWidth() / 2),
+      (dc.getHeight() / 2),
+      Graphics.FONT_LARGE,
+      calculator.getLatestFormattedValue("power", "%d"),
       Graphics.TEXT_JUSTIFY_CENTER
     );
 
@@ -57,6 +65,16 @@ class ActiveDataFieldView extends Ui.DataField
       (dc.getWidth() / 18) * 8,
       (dc.getHeight() / 6),
       4
+    );
+
+    dc.setColor(Graphics.COLOR_PURPLE, Graphics.COLOR_TRANSPARENT);
+    dc.drawArc(
+      (dc.getWidth() / 2),
+      (dc.getHeight() / 2),
+      (dc.getWidth() / 3),
+      Graphics.ARC_CLOCKWISE,
+      5,
+      175
     );
   }
 }
