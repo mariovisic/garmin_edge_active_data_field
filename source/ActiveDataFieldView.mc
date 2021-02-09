@@ -5,6 +5,7 @@ using Toybox.Lang;
 class ActiveDataFieldView extends Ui.DataField
 {
   hidden var batteryPercentage;
+  hidden var clockTime;
   hidden var calculator = new ActiveDataFieldCalculator();
 
   function initialize() {
@@ -13,11 +14,13 @@ class ActiveDataFieldView extends Ui.DataField
 
   function compute(info) {
     batteryPercentage = System.getSystemStats().battery;
+    clockTime = System.getClockTime();
     calculator.logInfo(info);
   }
 
   function onUpdate(dc) {
     new BatteryPercentageIndicator().draw(dc, batteryPercentage);
+    new CurrentTimeIndicator().draw(dc, clockTime);
 
     dc.setPenWidth(2);
 

@@ -8,7 +8,7 @@ class BatteryPercentageIndicator {
       (dc.getWidth() / 24),
       (dc.getWidth() / 24),
       Graphics.FONT_SYSTEM_TINY,
-      "Battery: " + batteryPercentage.format("%.0f") + "%",
+      "Battery: " + batteryPercentage.format("%2d") + "%",
       Graphics.TEXT_JUSTIFY_LEFT
     );
   }
