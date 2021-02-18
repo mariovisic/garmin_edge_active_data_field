@@ -28,7 +28,9 @@ class ActiveDataFieldCalculator {
     }
   }
   function getLatestValue(name) {
-    return historicalValues.get(name).slice(-1, null)[0];
+    var value = historicalValues.get(name).slice(-1, null)[0];
+
+    return value == null ? 0 : value;
   }
 
   function getLatestFormattedValue(name, format) {

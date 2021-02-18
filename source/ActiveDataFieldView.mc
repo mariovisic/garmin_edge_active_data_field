@@ -67,14 +67,21 @@ class ActiveDataFieldView extends Ui.DataField
       4
     );
 
-    dc.setColor(Graphics.COLOR_PURPLE, Graphics.COLOR_TRANSPARENT);
-    dc.drawArc(
-      (dc.getWidth() / 2),
-      (dc.getHeight() / 2),
-      (dc.getWidth() / 3),
-      Graphics.ARC_CLOCKWISE,
-      5,
-      175
-    );
+    dc.setPenWidth(12);
+
+    var currentPower = calculator.getLatestValue("power");
+    if(currentPower > 0) {
+      var powerArcFinishAngle = (((currentPower.toFloat() / 1000) * 190).toNumber() % 360) + 175;
+
+      dc.setColor(Graphics.COLOR_PURPLE, Graphics.COLOR_TRANSPARENT);
+      dc.drawArc(
+        (dc.getWidth() / 2),
+        (dc.getHeight() / 2),
+        (dc.getWidth() / 3),
+        Graphics.ARC_COUNTER_CLOCKWISE,
+        175,
+        powerArcFinishAngle
+      );
+    }
   }
 }
