@@ -13,8 +13,8 @@ class ActiveDataFieldView extends Ui.DataField
   const POWER_COLORS = [
     { "power" => 1.51, "powerMax" => 5, "color" => 0xBC0722, "background" => 0xFF0F17 }, // Neuromuscular
     { "power" => 1.21, "powerMax" => 1.50, "color" => 0xFF0F17, "background" => 0xFF6111 }, // Anaerobic
-    { "power" => 1.06, "powerMax" => 1.20, "color" => 0xFF6111, "background" => 0xFFFF00 }, // VO2 Max
-    { "power" => 0.91, "powerMax" => 1.05, "color" => 0xFFFF00, "background" => 0x00A746 }, // Threshold
+    { "power" => 1.06, "powerMax" => 1.20, "color" => 0xFF6111, "background" => 0xc2c219 }, // VO2 Max
+    { "power" => 0.91, "powerMax" => 1.05, "color" => 0xc2c219, "background" => 0x00A746 }, // Threshold
     { "power" => 0.76, "powerMax" => 0.90, "color" => 0x00A746, "background" => 0x8EC6FF }, // Tempo
     { "power" => 0.55, "powerMax" => 0.75, "color" => 0x8EC6FF, "background" => 0x999999 }, // Endurance
     { "power" => 0.0, "powerMax" => 0.54, "color" => 0x999999, "background" => Graphics.COLOR_TRANSPARENT } // Active Recovery
@@ -53,14 +53,6 @@ class ActiveDataFieldView extends Ui.DataField
       Graphics.TEXT_JUSTIFY_CENTER
     );
 
-    dc.drawText(
-      (dc.getWidth() / 2),
-      (dc.getHeight() / 2),
-      Graphics.FONT_LARGE,
-      calculator.getLatestFormattedValue("power", "%d"),
-      Graphics.TEXT_JUSTIFY_CENTER
-    );
-
     dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_TRANSPARENT);
     dc.drawRoundedRectangle(
       ((dc.getWidth() / 18) * 1) - 4,
@@ -86,7 +78,7 @@ class ActiveDataFieldView extends Ui.DataField
     if(currentPower > 0) {
       
       for(var i = 0; i < POWER_COLORS.size(); i++) {
-        if(currentPower > POWER_COLORS[i].get("power") * FTP) {
+        if(currentPower >= POWER_COLORS[i].get("power") * FTP) {
           powerColor = POWER_COLORS[i];
           break;
         }
@@ -97,16 +89,6 @@ class ActiveDataFieldView extends Ui.DataField
       var currentPowerPercentageInZone = (currentPower.toFloat() - currentZoneMinimum) / (currentZoneMaximum - currentZoneMinimum);
 
       var powerArcFinishAngle = ((currentPowerPercentageInZone * 190).toNumber() % 360) + 175;
-
-      dc.setColor(powerColor.get("background"), Graphics.COLOR_TRANSPARENT);
-       dc.drawArc(
-        (dc.getWidth() / 2),
-        (dc.getHeight() / 2),
-        (dc.getWidth() / 3),
-        Graphics.ARC_COUNTER_CLOCKWISE,
-        175,
-        5
-      );
 
       dc.setColor(powerColor.get("color"), Graphics.COLOR_TRANSPARENT);
 
@@ -119,5 +101,13 @@ class ActiveDataFieldView extends Ui.DataField
         powerArcFinishAngle
       );
     }
+
+    dc.drawText(
+      (dc.getWidth() / 2),
+      (dc.getHeight() / 2),
+      Graphics.FONT_LARGE,
+      calculator.getLatestFormattedValue("power", "%d"),
+      Graphics.TEXT_JUSTIFY_CENTER
+    );
   }
 }
