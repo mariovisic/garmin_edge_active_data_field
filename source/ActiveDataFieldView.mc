@@ -11,13 +11,13 @@ class ActiveDataFieldView extends Ui.DataField
   const FTP = 306;
 
   const POWER_COLORS = [
-    { "power" => 1.51, "powerMax" => 5, "color" => 0xBC0722, "background" => 0xFF0F17 }, // Neuromuscular
-    { "power" => 1.21, "powerMax" => 1.50, "color" => 0xFF0F17, "background" => 0xFF6111 }, // Anaerobic
-    { "power" => 1.06, "powerMax" => 1.20, "color" => 0xFF6111, "background" => 0xc2c219 }, // VO2 Max
-    { "power" => 0.91, "powerMax" => 1.05, "color" => 0xc2c219, "background" => 0x00A746 }, // Threshold
-    { "power" => 0.76, "powerMax" => 0.90, "color" => 0x00A746, "background" => 0x8EC6FF }, // Tempo
-    { "power" => 0.55, "powerMax" => 0.75, "color" => 0x8EC6FF, "background" => 0x999999 }, // Endurance
-    { "power" => 0.0, "powerMax" => 0.54, "color" => 0x999999, "background" => Graphics.COLOR_TRANSPARENT } // Active Recovery
+    { "power" => 0.0, "powerMax" => 0.54, "color" => 0x999999 }, // Active Recovery
+    { "power" => 0.55, "powerMax" => 0.75, "color" => 0x8EC6FF }, // Endurance
+    { "power" => 0.76, "powerMax" => 0.90, "color" => 0x00A746 }, // Tempo
+    { "power" => 0.91, "powerMax" => 1.05, "color" => 0xc2c219 }, // Threshold
+    { "power" => 1.06, "powerMax" => 1.20, "color" => 0xFF6111 }, // VO2 Max
+    { "power" => 1.21, "powerMax" => 1.50, "color" => 0xFF0F17 }, // Anaerobic
+    { "power" => 1.51, "powerMax" => 5, "color" => 0xBC0722 } // Neuromuscular
   ];
 
   function initialize() {
@@ -80,26 +80,34 @@ class ActiveDataFieldView extends Ui.DataField
       for(var i = 0; i < POWER_COLORS.size(); i++) {
         if(currentPower >= POWER_COLORS[i].get("power") * FTP) {
           powerColor = POWER_COLORS[i];
-          break;
+
+          var maxPowerToDisplay = FTP * 1.4;
+          if(currentPower > maxPowerToDisplay) {
+            maxPowerToDisplay = currentPower;
+          }
+          var currentZoneMinimum = powerColor.get("power") * FTP;
+          var currentZoneMaximum = powerColor.get("powerMax") * FTP;
+
+          var currentPowerOrZoneMax = currentZoneMaximum;
+          if(currentPower < currentZoneMaximum) {
+            currentPowerOrZoneMax = currentPower;
+          }
+
+          var powerArcStartAngle = 175 + (currentZoneMinimum.toFloat() / maxPowerToDisplay.toFloat() * 190);
+          var powerArcFinishAngle = 175 + (currentPowerOrZoneMax.toFloat() / maxPowerToDisplay.toFloat() * 190);
+
+          dc.setColor(powerColor.get("color"), Graphics.COLOR_TRANSPARENT);
+
+          dc.drawArc(
+            (dc.getWidth() / 2),
+            (dc.getHeight() / 2),
+            (dc.getWidth() / 3),
+            Graphics.ARC_COUNTER_CLOCKWISE,
+            powerArcStartAngle,
+            powerArcFinishAngle
+          );
         }
       }
-
-      var currentZoneMinimum = powerColor.get("power") * FTP;
-      var currentZoneMaximum = powerColor.get("powerMax") * FTP;
-      var currentPowerPercentageInZone = (currentPower.toFloat() - currentZoneMinimum) / (currentZoneMaximum - currentZoneMinimum);
-
-      var powerArcFinishAngle = ((currentPowerPercentageInZone * 190).toNumber() % 360) + 175;
-
-      dc.setColor(powerColor.get("color"), Graphics.COLOR_TRANSPARENT);
-
-      dc.drawArc(
-        (dc.getWidth() / 2),
-        (dc.getHeight() / 2),
-        (dc.getWidth() / 3),
-        Graphics.ARC_COUNTER_CLOCKWISE,
-        175,
-        powerArcFinishAngle
-      );
     }
 
     dc.drawText(
