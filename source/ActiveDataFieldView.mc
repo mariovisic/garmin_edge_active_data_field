@@ -71,17 +71,15 @@ class ActiveDataFieldView extends Ui.DataField
       4
     );
 
-    dc.setPenWidth(12);
-
     var currentPower = calculator.getLatestValue("power");
     var powerColor = null;
+
     if(currentPower > 0) {
-      
       for(var i = 0; i < POWER_COLORS.size(); i++) {
-        if(currentPower >= POWER_COLORS[i].get("power") * FTP) {
+        if(currentPower > (POWER_COLORS[i].get("power") * FTP).toNumber() + 1) {
           powerColor = POWER_COLORS[i];
 
-          var maxPowerToDisplay = FTP * 1.4;
+          var maxPowerToDisplay = FTP * 1.5;
           if(currentPower > maxPowerToDisplay) {
             maxPowerToDisplay = currentPower;
           }
@@ -96,6 +94,7 @@ class ActiveDataFieldView extends Ui.DataField
           var powerArcStartAngle = 175 + (currentZoneMinimum.toFloat() / maxPowerToDisplay.toFloat() * 190);
           var powerArcFinishAngle = 175 + (currentPowerOrZoneMax.toFloat() / maxPowerToDisplay.toFloat() * 190);
 
+          dc.setPenWidth(18);
           dc.setColor(powerColor.get("color"), Graphics.COLOR_TRANSPARENT);
 
           dc.drawArc(
