@@ -116,5 +116,16 @@ class ActiveDataFieldView extends Ui.DataField
       calculator.getLatestFormattedValue("power", "%d"),
       Graphics.TEXT_JUSTIFY_CENTER
     );
+
+    var powerDimension = dc.getTextDimensions(calculator.getLatestFormattedValue("power", "%d"), Graphics.FONT_LARGE);
+    var powerLabelDimension = dc.getTextDimensions("Watts", Graphics.FONT_SYSTEM_TINY);
+
+    dc.drawText(
+      (dc.getWidth() / 2) + (powerDimension[0] / 2) + (dc.getWidth() / 100),
+      (dc.getHeight() / 2) + powerDimension[1] - powerLabelDimension[1] - 4,
+      Graphics.FONT_SYSTEM_TINY,
+      "Watts",
+      Graphics.TEXT_JUSTIFY_LEFT
+    );
   }
 }
