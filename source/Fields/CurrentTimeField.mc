@@ -1,6 +1,6 @@
 using Toybox.Graphics;
 
-class CurrentTimeIndicator {
+class CurrentTimeField {
   var amOrPm;
   var hour;
 

@@ -1,6 +1,6 @@
 using Toybox.Graphics;
 
-class BatteryPercentageIndicator {
+class BatteryPercentageField {
   function draw(dc, batteryPercentage) {
     dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
 

@@ -10,16 +10,6 @@ class ActiveDataFieldView extends Ui.DataField
 
   const FTP = 306;
 
-  const POWER_COLORS = [
-    { "power" => 0.0, "powerMax" => 0.54, "color" => 0x999999 }, // Active Recovery
-    { "power" => 0.55, "powerMax" => 0.75, "color" => 0x8EC6FF }, // Endurance
-    { "power" => 0.76, "powerMax" => 0.90, "color" => 0x00A746 }, // Tempo
-    { "power" => 0.91, "powerMax" => 1.05, "color" => 0xc2c219 }, // Threshold
-    { "power" => 1.06, "powerMax" => 1.20, "color" => 0xFF6111 }, // VO2 Max
-    { "power" => 1.21, "powerMax" => 1.50, "color" => 0xFF0F17 }, // Anaerobic
-    { "power" => 1.51, "powerMax" => 5, "color" => 0xBC0722 } // Neuromuscular
-  ];
-
   function initialize() {
     DataField.initialize();
   }
@@ -31,8 +21,8 @@ class ActiveDataFieldView extends Ui.DataField
   }
 
   function onUpdate(dc) {
-    new BatteryPercentageIndicator().draw(dc, batteryPercentage);
-    new CurrentTimeIndicator().draw(dc, clockTime);
+    new BatteryPercentageField().draw(dc, batteryPercentage);
+    new CurrentTimeField().draw(dc, clockTime);
 
     dc.setPenWidth(2);
 
@@ -72,60 +62,9 @@ class ActiveDataFieldView extends Ui.DataField
     );
 
     var currentPower = calculator.getLatestValue("power");
-    var powerColor = null;
 
-    if(currentPower > 0) {
-      for(var i = 0; i < POWER_COLORS.size(); i++) {
-        if(currentPower > (POWER_COLORS[i].get("power") * FTP).toNumber() + 1) {
-          powerColor = POWER_COLORS[i];
+   new PowerArcField().draw(dc, currentPower, FTP);
+   new MainPowerField().draw(dc, calculator.getLatestFormattedValue("power", "%d"));
 
-          var maxPowerToDisplay = FTP * 1.5;
-          if(currentPower > maxPowerToDisplay) {
-            maxPowerToDisplay = currentPower;
-          }
-          var currentZoneMinimum = powerColor.get("power") * FTP;
-          var currentZoneMaximum = powerColor.get("powerMax") * FTP;
-
-          var currentPowerOrZoneMax = currentZoneMaximum;
-          if(currentPower < currentZoneMaximum) {
-            currentPowerOrZoneMax = currentPower;
-          }
-
-          var powerArcStartAngle = 175 + (currentZoneMinimum.toFloat() / maxPowerToDisplay.toFloat() * 190);
-          var powerArcFinishAngle = 175 + (currentPowerOrZoneMax.toFloat() / maxPowerToDisplay.toFloat() * 190);
-
-          dc.setPenWidth(18);
-          dc.setColor(powerColor.get("color"), Graphics.COLOR_TRANSPARENT);
-
-          dc.drawArc(
-            (dc.getWidth() / 2),
-            (dc.getHeight() / 2),
-            (dc.getWidth() / 3),
-            Graphics.ARC_COUNTER_CLOCKWISE,
-            powerArcStartAngle,
-            powerArcFinishAngle
-          );
-        }
-      }
-    }
-
-    dc.drawText(
-      (dc.getWidth() / 2),
-      (dc.getHeight() / 2),
-      Graphics.FONT_LARGE,
-      calculator.getLatestFormattedValue("power", "%d"),
-      Graphics.TEXT_JUSTIFY_CENTER
-    );
-
-    var powerDimension = dc.getTextDimensions(calculator.getLatestFormattedValue("power", "%d"), Graphics.FONT_LARGE);
-    var powerLabelDimension = dc.getTextDimensions("Watts", Graphics.FONT_SYSTEM_TINY);
-
-    dc.drawText(
-      (dc.getWidth() / 2) + (powerDimension[0] / 2) + (dc.getWidth() / 100),
-      (dc.getHeight() / 2) + powerDimension[1] - powerLabelDimension[1] - 4,
-      Graphics.FONT_SYSTEM_TINY,
-      "Watts",
-      Graphics.TEXT_JUSTIFY_LEFT
-    );
   }
 }
