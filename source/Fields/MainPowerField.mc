@@ -9,13 +9,13 @@ class MainPowerField {
     );
 
     var powerDimension = dc.getTextDimensions(powerValueText, Graphics.FONT_LARGE);
-    var powerLabelDimension = dc.getTextDimensions("Watts", Graphics.FONT_SYSTEM_TINY);
+    var powerLabelDimension = dc.getTextDimensions("W", Graphics.FONT_SMALL);
 
     dc.drawText(
       (dc.getWidth() / 2) + (powerDimension[0] / 2) + (dc.getWidth() / 100),
       ((dc.getHeight() / 18) * 8) + powerDimension[1] - powerLabelDimension[1] - 4,
-      Graphics.FONT_SYSTEM_TINY,
-      "Watts",
+      Graphics.FONT_SMALL,
+      "W",
       Graphics.TEXT_JUSTIFY_LEFT
     );
   }
