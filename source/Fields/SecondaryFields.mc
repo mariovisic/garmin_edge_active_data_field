@@ -44,6 +44,17 @@ class SecondaryFields {
         Graphics.TEXT_JUSTIFY_CENTER
       );
 
+      var valueDimension = dc.getTextDimensions(calculator.getLatestFormattedValue(fieldNames[i], FIELD_DATA[fieldNames[i]].get("format")), Graphics.FONT_LARGE);
+      var unitDimension = dc.getTextDimensions(FIELD_DATA[fieldNames[i]].get("unit"), Graphics.FONT_XTINY);
+
+      dc.drawText(
+        ((dc.getWidth() / 18) * COORDINATES[i].get("text_x")) + (valueDimension[0] / 2) + (dc.getWidth() / 100) + 2,
+        ((dc.getHeight() / 18) * COORDINATES[i].get("text_y")) + valueDimension[1] - unitDimension[1] + 8,
+        Graphics.FONT_XTINY,
+        FIELD_DATA[fieldNames[i]].get("unit"),
+        Graphics.TEXT_JUSTIFY_LEFT
+      );
+
       dc.drawText(
         ((dc.getWidth() / 18) * COORDINATES[i].get("text_x")) + 2,
         ((dc.getHeight() / 18) * COORDINATES[i].get("text_y")) - 1,
@@ -51,7 +62,6 @@ class SecondaryFields {
         FIELD_DATA[fieldNames[i]].get("label"),
         Graphics.TEXT_JUSTIFY_CENTER
       );
-
 
       dc.setColor(FIELD_DATA[fieldNames[i]].get("color"), Graphics.COLOR_TRANSPARENT);
 
