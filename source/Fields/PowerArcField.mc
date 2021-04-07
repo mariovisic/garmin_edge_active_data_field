@@ -11,6 +11,7 @@ class PowerArcField {
 
   function draw(dc, currentPower, ftp) {
     var powerColor = null;
+    var arcRadius = null;
     
     if(currentPower > 0) {
       for(var i = 0; i < POWER_COLORS.size(); i++) {
@@ -32,17 +33,19 @@ class PowerArcField {
           var powerArcStartAngle = 175 + (currentZoneMinimum.toFloat() / maxPowerToDisplay.toFloat() * 190);
           var powerArcFinishAngle = 175 + (currentPowerOrZoneMax.toFloat() / maxPowerToDisplay.toFloat() * 190);
 
-          if(currentPower < currentZoneMaximum) {
+          if(i > 0 && currentPower < currentZoneMaximum) {
             dc.setPenWidth(24);
+            arcRadius = (dc.getWidth() / 3) - 6;
           } else {
             dc.setPenWidth(12);
+            arcRadius = (dc.getWidth() / 3);
           }
           dc.setColor(powerColor.get("color"), Graphics.COLOR_TRANSPARENT);
 
           dc.drawArc(
             (dc.getWidth() / 2),
             (dc.getHeight() / 18) * 8,
-            currentPower < currentZoneMaximum ? (dc.getWidth() / 3) - 6 : (dc.getWidth() / 3),
+            arcRadius,
             Graphics.ARC_COUNTER_CLOCKWISE,
             powerArcStartAngle,
             powerArcFinishAngle
