@@ -23,7 +23,7 @@ class ActiveDataFieldView extends Ui.DataField
   function onUpdate(dc) {
     new BatteryPercentageField().draw(dc, batteryPercentage);
     new CurrentTimeField().draw(dc, clockTime);
-    new SecondaryFields().draw(dc, calculator);
+    new SecondaryFields().draw(dc, calculator, ["heartRate", "speed"]);
     new PowerArcField().draw(dc, calculator.getLatestValue("power"), FTP);
     new MainPowerField().draw(dc, calculator.getLatestFormattedValue("power", "%d"));
   }
