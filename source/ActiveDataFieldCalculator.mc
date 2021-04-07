@@ -13,25 +13,17 @@ class ActiveDataFieldCalculator {
 	function initialize() {}
 
   function logInfo(info) {
-    logValue("altitude", info.altitude, 5);
-    logValue("heartRate", info.currentHeartRate, 5);
-    logValue("power", info.currentPower, 5);
-    logValue("cadence", info.currentCadence, 5);
-    if(info.elapsedDistance == null) {
-      logValue("distance", info.elapsedDistance, 5);
-    } else {
-      logValue("distance", info.elapsedDistance / 1000.0, 5);
-    }
-    if(info.currentSpeed == null) {
-      logValue("speed", info.currentSpeed, 5);
-    } else {
-      logValue("speed", info.currentSpeed * 3.6, 5);
-    }
+    logValue("altitude", info.altitude, 5, 1);
+    logValue("heartRate", info.currentHeartRate, 5, 1);
+    logValue("power", info.currentPower, 5, 1);
+    logValue("cadence", info.currentCadence, 5, 0.5);
+    logValue("distance", info.elapsedDistance, 5, 0.001);
+    logValue("speed", info.currentSpeed, 5, 3.6);
   }
 
-  hidden function logValue(name, value, numValuesToKeep) {
+  hidden function logValue(name, value, numValuesToKeep, multiplier) {
     if (value != null) {
-      historicalValues.get(name).add(value);
+      historicalValues.get(name).add(value * multiplier);
       historicalValues.put(name, historicalValues.get(name).slice(-numValuesToKeep, null));
     }
   }
