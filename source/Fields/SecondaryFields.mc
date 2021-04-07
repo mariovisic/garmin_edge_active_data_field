@@ -1,7 +1,9 @@
 class SecondaryFields {
   const FIELD_DATA = {
-    "heartRate" => { "color" => Graphics.COLOR_RED, "label" => "bpm" },
-    "speed" => { "color" => Graphics.COLOR_BLUE, "label" => "km/h" },
+    "heartRate" => { "color" => Graphics.COLOR_RED, "label" => "bpm", "format" => "%d" },
+    "speed" => { "color" => Graphics.COLOR_BLUE, "label" => "km/h", "format" => "%d" },
+    "cadence" => { "color" => Graphics.COLOR_DK_GREEN, "label" => "rpm", "format" => "%d" },
+    "distance" => { "color" => Graphics.COLOR_PURPLE, "label" => "km", "format" => "%.1f" },
   };
 
   const COORDINATES = [
@@ -14,7 +16,18 @@ class SecondaryFields {
       "text_y" => 3,
       "box_x" => 10,
       "box_y" => 3,
-    }
+    },
+    { "text_x" => 4.5,
+      "text_y" => 15.5,
+      "box_x" => 1,
+      "box_y" => 15.5,
+    },
+    { "text_x" => 13.5,
+      "text_y" => 15.5,
+      "box_x" => 10,
+      "box_y" => 15.5,
+    },
+
   ];
 
   function draw(dc, calculator, fieldNames) {
@@ -27,7 +40,7 @@ class SecondaryFields {
         ((dc.getWidth() / 18) * COORDINATES[i].get("text_x")) + 2,
         ((dc.getHeight() / 18) * COORDINATES[i].get("text_y")) + 2,
         Graphics.FONT_LARGE,
-        calculator.getLatestFormattedValue(fieldNames[i], "%d"),
+        calculator.getLatestFormattedValue(fieldNames[i], FIELD_DATA[fieldNames[i]].get("format")),
         Graphics.TEXT_JUSTIFY_CENTER
       );
 

@@ -5,6 +5,8 @@ class ActiveDataFieldCalculator {
     "altitude" => new [5],
     "heartRate" => new [5],
     "power" => new [5],
+    "cadence" => new [5],
+    "distance" => new [5],
     "speed" => new [5],
   };
 
@@ -14,6 +16,12 @@ class ActiveDataFieldCalculator {
     logValue("altitude", info.altitude, 5);
     logValue("heartRate", info.currentHeartRate, 5);
     logValue("power", info.currentPower, 5);
+    logValue("cadence", info.currentCadence, 5);
+    if(info.elapsedDistance == null) {
+      logValue("distance", info.elapsedDistance, 5);
+    } else {
+      logValue("distance", info.elapsedDistance / 1000.0, 5);
+    }
     if(info.currentSpeed == null) {
       logValue("speed", info.currentSpeed, 5);
     } else {

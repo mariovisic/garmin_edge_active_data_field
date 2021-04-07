@@ -37,7 +37,7 @@ class PowerArcField {
 
           dc.drawArc(
             (dc.getWidth() / 2),
-            (dc.getHeight() / 2),
+            (dc.getHeight() / 18) * 8,
             (dc.getWidth() / 3),
             Graphics.ARC_COUNTER_CLOCKWISE,
             powerArcStartAngle,
@@ -45,6 +45,8 @@ class PowerArcField {
           );
         }
       }
+    } else {
+      dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
     }
   }
 }
