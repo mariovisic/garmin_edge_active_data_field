@@ -10,22 +10,22 @@ class SecondaryFields {
     { "text_x" => 4.5,
       "text_y" => 2.75,
       "box_x" => 1,
-      "box_y" => 2.75,
+      "box_y" => 2.5,
     },
     { "text_x" => 13.5,
       "text_y" => 2.75,
       "box_x" => 10,
-      "box_y" => 2.75,
+      "box_y" => 2.5,
     },
     { "text_x" => 4.5,
       "text_y" => 15.25,
       "box_x" => 1,
-      "box_y" => 15.25,
+      "box_y" => 14.75,
     },
     { "text_x" => 13.5,
       "text_y" => 15.25,
       "box_x" => 10,
-      "box_y" => 15.25,
+      "box_y" => 14.75,
     },
 
   ];
@@ -57,7 +57,7 @@ class SecondaryFields {
 
       dc.drawText(
         ((dc.getWidth() / 18) * COORDINATES[i].get("text_x")) + 2,
-        ((dc.getHeight() / 18) * COORDINATES[i].get("text_y")) - 1,
+        ((dc.getHeight() / 18) * COORDINATES[i].get("text_y")) - 4,
         Graphics.FONT_SMALL,
         FIELD_DATA[fieldNames[i]].get("label"),
         Graphics.TEXT_JUSTIFY_CENTER
@@ -69,7 +69,7 @@ class SecondaryFields {
         ((dc.getWidth() / 18) * COORDINATES[i].get("box_x")) - 4,
         (dc.getHeight() / 18) * COORDINATES[i].get("box_y"),
         (dc.getWidth() / 18) * 8,
-        (dc.getHeight() / 18) * 3.5,
+        (dc.getHeight() / 18) * 4,
         4
       );
     }

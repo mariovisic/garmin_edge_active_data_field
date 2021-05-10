@@ -1,6 +1,6 @@
 class PowerArcField {
   const POWER_COLORS = [
-    { "power" => 0.0, "powerMax" => 0.54, "color" => 0x999999 }, // Active Recovery
+    { "power" => 0.0, "powerMax" => 0.54, "color" => 0x777777 }, // Active Recovery
     { "power" => 0.55, "powerMax" => 0.75, "color" => 0x8EC6FF }, // Endurance
     { "power" => 0.76, "powerMax" => 0.90, "color" => 0x00A746 }, // Tempo
     { "power" => 0.91, "powerMax" => 1.05, "color" => 0xc2c219 }, // Threshold
@@ -37,14 +37,14 @@ class PowerArcField {
             dc.setPenWidth(24);
             arcRadius = (dc.getWidth() / 3) - 6;
           } else {
-            dc.setPenWidth(12);
+            dc.setPenWidth(14);
             arcRadius = (dc.getWidth() / 3);
           }
           dc.setColor(powerColor.get("color"), Graphics.COLOR_TRANSPARENT);
 
           dc.drawArc(
             (dc.getWidth() / 2),
-            (dc.getHeight() / 18) * 8,
+            (dc.getHeight() / 18) * 9,
             arcRadius,
             Graphics.ARC_COUNTER_CLOCKWISE,
             powerArcStartAngle,
