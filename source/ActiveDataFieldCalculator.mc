@@ -27,15 +27,24 @@ class ActiveDataFieldCalculator {
       historicalValues.put(name, historicalValues.get(name).slice(-numValuesToKeep, null));
     }
   }
+
+  hidden function getRawValue(name) {
+    return historicalValues.get(name).slice(-1, null)[0];
+  }
+
   function getLatestValue(name) {
-    var value = historicalValues.get(name).slice(-1, null)[0];
+    var value = getRawValue(name);
 
     return value == null ? 0 : value;
   }
 
   function getLatestFormattedValue(name, format) {
-    var value = getLatestValue(name);
+    var value = getRawValue(name);
 
-    return value == null ? "-" : value.format(format);
+    return value == null ? "---" : value.format(format);
+  }
+
+  function hasField(name) {
+    return(getRawValue(name) != null);
   }
 }
