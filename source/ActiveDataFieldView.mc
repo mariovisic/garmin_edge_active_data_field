@@ -27,6 +27,6 @@ class ActiveDataFieldView extends Ui.DataField
     new CurrentTimeAndBatteryField().draw(dc, clockTime, batteryPercentage);
     new SecondaryFields().draw(dc, calculator, ["speed", "distance", "heartRate", "cadence"]);
     new PowerArcField().draw(dc, calculator.getLatestValue("power"), FTP);
-    new MainPowerField().draw(dc, calculator.getLatestFormattedValue("power", "%d"));
+    new MainField().draw(dc, calculator.getLatestFormattedValue("power", "%d"), "W");
   }
 }

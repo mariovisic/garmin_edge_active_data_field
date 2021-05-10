@@ -1,21 +1,21 @@
-class MainPowerField {
-  function draw(dc, powerValueText) {
+class MainField {
+  function draw(dc, valueText, unit) {
     dc.drawText(
       (dc.getWidth() / 2),
       (dc.getHeight() / 18) * 9,
       Graphics.FONT_LARGE,
-      powerValueText,
+      valueText,
       Graphics.TEXT_JUSTIFY_CENTER
     );
 
-    var powerDimension = dc.getTextDimensions(powerValueText, Graphics.FONT_LARGE);
-    var powerLabelDimension = dc.getTextDimensions("W", Graphics.FONT_SMALL);
+    var powerDimension = dc.getTextDimensions(valueText, Graphics.FONT_LARGE);
+    var powerLabelDimension = dc.getTextDimensions(unit, Graphics.FONT_SMALL);
 
     dc.drawText(
       (dc.getWidth() / 2) + (powerDimension[0] / 2) + (dc.getWidth() / 100),
       ((dc.getHeight() / 18) * 9) + powerDimension[1] - powerLabelDimension[1] - 3,
       Graphics.FONT_SMALL,
-      "W",
+      unit,
       Graphics.TEXT_JUSTIFY_LEFT
     );
   }
