@@ -1,11 +1,11 @@
 class PowerArcField {
   const POWER_COLORS = [
-    { "power" => 0.0, "powerMax" => 0.54, "color" => 0x777777 }, // Active Recovery
-    { "power" => 0.55, "powerMax" => 0.75, "color" => 0x8EC6FF }, // Endurance
-    { "power" => 0.76, "powerMax" => 0.90, "color" => 0x00A746 }, // Tempo
-    { "power" => 0.91, "powerMax" => 1.05, "color" => 0xc2c219 }, // Threshold
-    { "power" => 1.06, "powerMax" => 1.20, "color" => 0xFF6111 }, // VO2 Max
-    { "power" => 1.21, "powerMax" => 1.50, "color" => 0xFF0F17 }, // Anaerobic
+    { "power" => 0.0, "powerMax" => 0.548, "color" => 0x777777 }, // Active Recovery
+    { "power" => 0.55, "powerMax" => 0.758, "color" => 0x8EC6FF }, // Endurance
+    { "power" => 0.76, "powerMax" => 0.908, "color" => 0x00A746 }, // Tempo
+    { "power" => 0.91, "powerMax" => 1.058, "color" => 0xc2c219 }, // Threshold
+    { "power" => 1.06, "powerMax" => 1.208, "color" => 0xFF6111 }, // VO2 Max
+    { "power" => 1.21, "powerMax" => 1.508, "color" => 0xFF0F17 }, // Anaerobic
     { "power" => 1.51, "powerMax" => 5, "color" => 0xBC0722 } // Neuromuscular
   ];
 
