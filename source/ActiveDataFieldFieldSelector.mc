@@ -16,7 +16,11 @@ class ActiveDataFieldsSelector {
   }
 
   function mainField() {
-    return mapField(:power);
+    if(calculator.hasField(:power)) {
+      return mapField(:power);
+    } else {
+      return mapField(:heartRate);
+    }
   }
 
   function secondaryFields() {
@@ -37,6 +41,7 @@ class ActiveDataFieldsSelector {
       :color => FIELD_DATA.get(field).get(:color),
       :label => FIELD_DATA.get(field).get(:label),
       :unit => FIELD_DATA.get(field).get(:unit),
+      :value => calculator.getLatestValue(field),
       :formattedValue => calculator.getLatestFormattedValue(field, FIELD_DATA.get(field).get(:format))
     });
   }

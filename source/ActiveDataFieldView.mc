@@ -9,10 +9,6 @@ class ActiveDataFieldView extends Ui.DataField
   hidden var elapsedTime;
   hidden var calculator = new ActiveDataFieldCalculator();
 
-  // FIXME: These should eventually be set by the user!0
-  const FTP = 306;
-  const MAX_HR = 191;
-
   function initialize() {
     DataField.initialize();
   }
@@ -33,14 +29,7 @@ class ActiveDataFieldView extends Ui.DataField
 
     var mainField = fieldsSelector.mainField();
 
-    // FIXME: Remove this condition and have a way of using the same code path
-    // for power/heart rate/speed etc...
-    if (mainField.get(:name) == :power) {
-      new PowerArcField().draw(dc, calculator.getLatestValue(:power), FTP);
-    } else if(mainField.get(:name) == :heartRate) {
-      new HeartRateArcField().draw(dc, calculator.getLatestValue(:heartRate), MAX_HR);
-    }
-
+    new ArcField().draw(dc, mainField);
     new MainField().draw(dc, mainField);
   }
 }
