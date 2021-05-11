@@ -1,11 +1,4 @@
 class SecondaryFields {
-  const FIELD_DATA = {
-    "heartRate" => { "color" => Graphics.COLOR_RED, "label" => "Heart Rate", "unit" => "bpm", "format" => "%d" },
-    "speed" => { "color" => Graphics.COLOR_BLUE, "label" => "Speed", "unit" => "km/h", "format" => "%d" },
-    "cadence" => { "color" => Graphics.COLOR_DK_GREEN, "label" => "Cadence", "unit" => "rpm", "format" => "%d" },
-    "distance" => { "color" => Graphics.COLOR_PURPLE, "label" => "Distance", "unit" => "km", "format" => "%.1f" },
-  };
-
   const COORDINATES = [
     { "text_x" => 4.5,
       "text_y" => 2.75,
@@ -30,28 +23,28 @@ class SecondaryFields {
 
   ];
 
-  function draw(dc, calculator, fieldNames) {
+  function draw(dc, fields) {
     dc.setPenWidth(2);
 
-    for( var i = 0; i < fieldNames.size(); i++) {
+    for( var i = 0; i < fields.size(); i++) {
       dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
 
       dc.drawText(
         ((dc.getWidth() / 18) * COORDINATES[i].get("text_x")) + 2,
         ((dc.getHeight() / 18) * COORDINATES[i].get("text_y")) + 13,
         Graphics.FONT_LARGE,
-        calculator.getLatestFormattedValue(fieldNames[i], FIELD_DATA[fieldNames[i]].get("format")),
+        fields[i].get("formattedValue"),
         Graphics.TEXT_JUSTIFY_CENTER
       );
 
-      var valueDimension = dc.getTextDimensions(calculator.getLatestFormattedValue(fieldNames[i], FIELD_DATA[fieldNames[i]].get("format")), Graphics.FONT_LARGE);
-      var unitDimension = dc.getTextDimensions(FIELD_DATA[fieldNames[i]].get("unit"), Graphics.FONT_XTINY);
+      var valueDimension = dc.getTextDimensions(fields[i].get("formattedValue"), Graphics.FONT_LARGE);
+      var unitDimension = dc.getTextDimensions(fields[i].get("unit"), Graphics.FONT_XTINY);
 
       dc.drawText(
         ((dc.getWidth() / 18) * COORDINATES[i].get("text_x")) + (valueDimension[0] / 2) + (dc.getWidth() / 100) + 2,
         ((dc.getHeight() / 18) * COORDINATES[i].get("text_y")) + valueDimension[1] - unitDimension[1] + 8,
         Graphics.FONT_XTINY,
-        FIELD_DATA[fieldNames[i]].get("unit"),
+        fields[i].get("unit"),
         Graphics.TEXT_JUSTIFY_LEFT
       );
 
@@ -59,11 +52,11 @@ class SecondaryFields {
         ((dc.getWidth() / 18) * COORDINATES[i].get("text_x")) + 2,
         ((dc.getHeight() / 18) * COORDINATES[i].get("text_y")) - 4,
         Graphics.FONT_SMALL,
-        FIELD_DATA[fieldNames[i]].get("label"),
+        fields[i].get("label"),
         Graphics.TEXT_JUSTIFY_CENTER
       );
 
-      dc.setColor(FIELD_DATA[fieldNames[i]].get("color"), Graphics.COLOR_TRANSPARENT);
+      dc.setColor(fields[i].get("color"), Graphics.COLOR_TRANSPARENT);
 
       dc.drawRoundedRectangle(
         ((dc.getWidth() / 18) * COORDINATES[i].get("box_x")) - 4,

@@ -25,11 +25,11 @@ class ActiveDataFieldView extends Ui.DataField
   }
 
   function onUpdate(dc) {
+    var fieldsSelector = new ActiveDataFieldsSelector(calculator);
+
     new ElapsedTimeField().draw(dc, elapsedTime);
     new CurrentTimeAndBatteryField().draw(dc, clockTime, batteryPercentage);
-    // FIXME: Rather than passing the calculator in here, we should instead have an object we can get from the calculator to pass in here instead
-    // This would be super useful as we can ask the calculator to generate a list of secondary fields based on what is available
-    new SecondaryFields().draw(dc, calculator, ["speed", "distance", "heartRate", "cadence"]);
+    new SecondaryFields().draw(dc, fieldsSelector.secondaryFields());
 
     // FIXME: Rather than doing this condition here, instead we should just ask the calculator to output it's "main" field!
     if (calculator.hasField("power")) {
