@@ -31,13 +31,16 @@ class ActiveDataFieldView extends Ui.DataField
     new CurrentTimeAndBatteryField().draw(dc, clockTime, batteryPercentage);
     new SecondaryFields().draw(dc, fieldsSelector.secondaryFields());
 
-    // FIXME: Rather than doing this condition here, instead we should just ask the calculator to output it's "main" field!
-    if (calculator.hasField("power")) {
-      new PowerArcField().draw(dc, calculator.getLatestValue("power"), FTP);
-      new MainField().draw(dc, calculator.getLatestFormattedValue("power", "%d"), "W");
-    } else if(calculator.hasField("heartRate")) {
-      new HeartRateArcField().draw(dc, calculator.getLatestValue("heartRate"), MAX_HR);
-      new MainField().draw(dc, calculator.getLatestFormattedValue("heartRate", "%d"), "bpm");
+    var mainField = fieldsSelector.mainField();
+
+    // FIXME: Remove this condition and have a way of using the same code path
+    // for power/heart rate/speed etc...
+    if (mainField.get(:name) == :power) {
+      new PowerArcField().draw(dc, calculator.getLatestValue(:power), FTP);
+    } else if(mainField.get(:name) == :heartRate) {
+      new HeartRateArcField().draw(dc, calculator.getLatestValue(:heartRate), MAX_HR);
     }
+
+    new MainField().draw(dc, mainField);
   }
 }
