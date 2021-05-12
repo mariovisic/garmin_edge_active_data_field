@@ -44,112 +44,90 @@ class ArcField {
   }
 
   hidden function drawPower(dc, field) {
-    var powerColor = null;
-    var arcRadius = null;
-    var currentPower = field.get(:value);
+    var power = field.get(:value);
 
     for(var i = 0; i < POWER_ZONES.size(); i++) {
-      if(currentPower > (POWER_ZONES[i].get(:power) * FTP).toNumber() + 1) {
-        powerColor = POWER_ZONES[i];
+      var zone = POWER_ZONES[i];
 
-        var maxPowerToDisplay = FTP * 1.5;
-        if(currentPower > maxPowerToDisplay) {
-          maxPowerToDisplay = currentPower;
-        }
-        var currentZoneMinimum = powerColor.get(:power) * FTP;
-        var currentZoneMaximum = powerColor.get(:powerMax) * FTP;
-
-        var currentPowerOrZoneMax = currentZoneMaximum;
-        if(currentPower < currentZoneMaximum) {
-          currentPowerOrZoneMax = currentPower;
-        }
-
-        drawRawBand(
-          dc,
-          currentZoneMinimum.toFloat() / maxPowerToDisplay.toFloat(),
-          currentPowerOrZoneMax.toFloat() / maxPowerToDisplay.toFloat(),
-          i > 0 && currentPower < powerColor.get(:powerMax),
-          powerColor.get(:color)
-        );
-      }
+      drawRawBand(
+        dc,
+        0,
+        power,
+        FTP * 1.5,
+        zone.get(:power) * FTP,
+        zone.get(:powerMax) * FTP,
+        i > 0 && power < zone.get(:powerMax),
+        zone.get(:color)
+      );
     }
   }
 
   hidden function drawHeartRate(dc, field) {
-    var zone = null;
     var minimumHeartRateShown = (HEART_RATE_ZONES[0].get(:heartRate) * MAX_HR).toFloat();
     var heartRate = field.get(:value);
 
     for(var i = 0; i < HEART_RATE_ZONES.size(); i++) {
-      if(heartRate > (HEART_RATE_ZONES[i].get(:heartRate) * MAX_HR).toNumber() + 1) {
-        zone = HEART_RATE_ZONES[i];
+      var zone = HEART_RATE_ZONES[i];
 
-        var currentZoneMinimum = zone.get(:heartRate) * MAX_HR;
-        var currentZoneMaximum = zone.get(:heartRateMax) * MAX_HR;
-
-        var heartRateOrZoneMax = currentZoneMaximum;
-        if(heartRate < currentZoneMaximum) {
-          heartRateOrZoneMax = heartRate;
-        }
-
-        drawRawBand(
-          dc,
-          (currentZoneMinimum - minimumHeartRateShown).toFloat() / (MAX_HR - minimumHeartRateShown).toFloat(),
-          (heartRateOrZoneMax - minimumHeartRateShown).toFloat() / (MAX_HR - minimumHeartRateShown).toFloat(),
-          i > 0 && heartRate < zone.get(:heartRateMax),
-          zone.get(:color)
-        );
-      }
+      drawRawBand(
+        dc,
+        minimumHeartRateShown,
+        heartRate,
+        MAX_HR,
+        zone.get(:heartRate) * MAX_HR,
+        zone.get(:heartRateMax) * MAX_HR,
+        i > 0 && heartRate < zone.get(:heartRateMax),
+        zone.get(:color)
+      );
     }
   }
 
   hidden function drawSpeed(dc, field) {
-    if(field.get(:value) > 0) {
-      for(var i = 0; i < SPEED_ZONES.size(); i++) {
+    var speed = field.get(:value);
 
-        var zoneStart = SPEED_ZONES[i].get(:speed) / MAX_SPEED.toFloat();
-        var zoneFinish = SPEED_ZONES[i].get(:speedMax) / MAX_SPEED.toFloat();
-        var speed = field.get(:value).toFloat() / MAX_SPEED.toFloat();
-
-        var speedOrZoneMax = zoneFinish;
-        if(speed < zoneFinish) {
-          speedOrZoneMax = speed;
-        }
-
-        if(speed > zoneStart) {
-          drawRawBand(
-            dc,
-            zoneStart,
-            speedOrZoneMax,
-            false,
-            0x0084E3
-          );
-        }
-      }
+    for(var i = 0; i < SPEED_ZONES.size(); i++) {
+      drawRawBand(
+        dc,
+        0,
+        speed,
+        MAX_SPEED,
+        SPEED_ZONES[i].get(:speed),
+        SPEED_ZONES[i].get(:speedMax),
+        false,
+        0x0084E3
+      );
     }
   }
 
-  hidden function drawRawBand(dc, percentageZoneStart, percentageZoneFinish, highlightCurrentZone, color) {
-    var arcRadius = null;
-    var ArcStartAngle = 175 + (percentageZoneStart * 190);
-    var ArcFinishAngle = 175 + (percentageZoneFinish * 190);
+  hidden function drawRawBand(dc, startValueOffset, currentValue, maximumValue, zoneStart, zoneFinish, highlightCurrentZone, color) {
+    if(currentValue > zoneStart) {
+      if(currentValue < zoneFinish) {
+        zoneFinish = currentValue;
+      }
 
-    if(highlightCurrentZone) {
-      dc.setPenWidth(24);
-      arcRadius = (dc.getWidth() / 3) - 6;
-    } else {
-      dc.setPenWidth(14);
-      arcRadius = (dc.getWidth() / 3);
+      var arcRadius = null;
+      var ArcStartAngle = 175 + ((zoneStart - startValueOffset) / (maximumValue - startValueOffset) * 190);
+      var ArcFinishAngle = 175 + ((zoneFinish - startValueOffset) / (maximumValue - startValueOffset) * 190);
+
+      if(ArcFinishAngle > ArcStartAngle + 1) {
+        if(highlightCurrentZone) {
+          dc.setPenWidth(24);
+          arcRadius = (dc.getWidth() / 3) - 6;
+        } else {
+          dc.setPenWidth(14);
+          arcRadius = (dc.getWidth() / 3);
+        }
+        dc.setColor(color, Graphics.COLOR_TRANSPARENT);
+
+        dc.drawArc(
+          (dc.getWidth() / 2),
+          (dc.getHeight() / 18) * 9,
+          arcRadius,
+          Graphics.ARC_COUNTER_CLOCKWISE,
+          ArcStartAngle,
+          ArcFinishAngle
+        );
+      }
     }
-    dc.setColor(color, Graphics.COLOR_TRANSPARENT);
-
-    dc.drawArc(
-      (dc.getWidth() / 2),
-      (dc.getHeight() / 18) * 9,
-      arcRadius,
-      Graphics.ARC_COUNTER_CLOCKWISE,
-      ArcStartAngle,
-      ArcFinishAngle
-    );
   }
 }
