@@ -18,5 +18,13 @@ class MainField {
       field.get(:unit),
       Graphics.TEXT_JUSTIFY_LEFT
     );
+
+      dc.drawText(
+        (dc.getWidth() / 2),
+        (dc.getHeight() / 18) * 7.5,
+        Graphics.FONT_SMALL,
+        field.get(:label),
+        Graphics.TEXT_JUSTIFY_CENTER
+      );
   }
 }

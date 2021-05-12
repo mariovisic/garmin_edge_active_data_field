@@ -18,8 +18,10 @@ class ActiveDataFieldsSelector {
   function mainField() {
     if(calculator.hasField(:power)) {
       return mapField(:power);
-    } else {
+    } else if(calculator.hasField(:heartRate)) {
       return mapField(:heartRate);
+    } else {
+      return mapField(:speed);
     }
   }
 

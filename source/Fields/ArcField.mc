@@ -28,10 +28,12 @@ class ArcField {
       drawPower(dc, field);
     } else if(field.get(:name) == :heartRate) {
       drawHeartRate(dc, field);
+    } else if(field.get(:name) == :speed) {
+      drawSpeed(dc, field);
     }
   }
 
-  function drawPower(dc, field) {
+  hidden function drawPower(dc, field) {
     var powerColor = null;
     var arcRadius = null;
     var currentPower = field.get(:value);
@@ -64,7 +66,7 @@ class ArcField {
     }
   }
 
-  function drawHeartRate(dc, field) {
+  hidden function drawHeartRate(dc, field) {
     var zone = null;
     var minimumHeartRateShown = (HEART_RATE_ZONES[0].get(:heartRate) * MAX_HR).toFloat();
     var heartRate = field.get(:value);
@@ -90,6 +92,19 @@ class ArcField {
           zone.get(:color)
         );
       }
+    }
+  }
+
+  hidden function drawSpeed(dc, field) {
+    if(field.get(:value) > 0) {
+      drawRawBand(
+        dc,
+        0,
+        0,
+        field.get(:value).toFloat() / 60.0,
+        1,
+        0x0084E3
+      );
     }
   }
 
