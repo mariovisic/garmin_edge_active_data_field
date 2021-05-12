@@ -2,6 +2,7 @@ class ArcField {
   // FIXME: These should eventually be set by the user!
   const FTP = 306;
   const MAX_HR = 191;
+  const MAX_SPEED = 60;
 
   const POWER_ZONES = [
     { :power => 0.0, :powerMax => 0.548, :color => 0x777777 }, // Active Recovery
@@ -19,6 +20,15 @@ class ArcField {
     { :heartRate => 0.70, :heartRateMax => 0.798, :color => 0x00A746 }, // Tempo
     { :heartRate => 0.80, :heartRateMax => 0.898, :color => 0xc2c219 }, // Threshold
     { :heartRate => 0.90, :heartRateMax => 1.00, :color => 0xFF6111 }, // VO2 Max
+  ];
+
+  const SPEED_ZONES = [
+    { :speed => 0.0, :speedMax => 10.0 },
+    { :speed => 10.8, :speedMax => 20.0 },
+    { :speed => 20.8, :speedMax => 30.0 },
+    { :speed => 30.8, :speedMax => 40.0 },
+    { :speed => 40.8, :speedMax => 50.0 },
+    { :speed => 50.8, :speedMax => 60.0 },
   ];
 
   function draw(dc, field) {
@@ -56,10 +66,9 @@ class ArcField {
 
         drawRawBand(
           dc,
-          i,
           currentZoneMinimum.toFloat() / maxPowerToDisplay.toFloat(),
           currentPowerOrZoneMax.toFloat() / maxPowerToDisplay.toFloat(),
-          currentPower.toFloat() / FTP.toFloat(),
+          i > 0 && currentPower < powerColor.get(:powerMax),
           powerColor.get(:color)
         );
       }
@@ -85,10 +94,9 @@ class ArcField {
 
         drawRawBand(
           dc,
-          i,
           (currentZoneMinimum - minimumHeartRateShown).toFloat() / (MAX_HR - minimumHeartRateShown).toFloat(),
           (heartRateOrZoneMax - minimumHeartRateShown).toFloat() / (MAX_HR - minimumHeartRateShown).toFloat(),
-          heartRate.toFloat() / MAX_HR.toFloat(),
+          i > 0 && heartRate < zone.get(:heartRateMax),
           zone.get(:color)
         );
       }
@@ -97,23 +105,36 @@ class ArcField {
 
   hidden function drawSpeed(dc, field) {
     if(field.get(:value) > 0) {
-      drawRawBand(
-        dc,
-        0,
-        0,
-        field.get(:value).toFloat() / 60.0,
-        1,
-        0x0084E3
-      );
+      for(var i = 0; i < SPEED_ZONES.size(); i++) {
+
+        var zoneStart = SPEED_ZONES[i].get(:speed) / MAX_SPEED.toFloat();
+        var zoneFinish = SPEED_ZONES[i].get(:speedMax) / MAX_SPEED.toFloat();
+        var speed = field.get(:value).toFloat() / MAX_SPEED.toFloat();
+
+        var speedOrZoneMax = zoneFinish;
+        if(speed < zoneFinish) {
+          speedOrZoneMax = speed;
+        }
+
+        if(speed > zoneStart) {
+          drawRawBand(
+            dc,
+            zoneStart,
+            speedOrZoneMax,
+            false,
+            0x0084E3
+          );
+        }
+      }
     }
   }
 
-  hidden function drawRawBand(dc, i, percentageZoneStart, percentageZoneFinish, valuePercent, color) {
+  hidden function drawRawBand(dc, percentageZoneStart, percentageZoneFinish, highlightCurrentZone, color) {
     var arcRadius = null;
     var ArcStartAngle = 175 + (percentageZoneStart * 190);
     var ArcFinishAngle = 175 + (percentageZoneFinish * 190);
 
-    if(i > 0 && valuePercent < percentageZoneFinish) {
+    if(highlightCurrentZone) {
       dc.setPenWidth(24);
       arcRadius = (dc.getWidth() / 3) - 6;
     } else {
