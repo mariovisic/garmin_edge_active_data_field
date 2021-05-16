@@ -23,12 +23,12 @@ class ArcField {
   ];
 
   const SPEED_ZONES = [
-    { :speed => 0.0, :speedMax => 10.0, :color => 0x005999 },
-    { :speed => 10.0, :speedMax => 20.0, :color => 0x0089eb },
-    { :speed => 20.0, :speedMax => 30.0, :color => 0x005999 },
-    { :speed => 30.0, :speedMax => 40.0, :color => 0x0089eb },
-    { :speed => 40.0, :speedMax => 50.0, :color => 0x005999 },
-    { :speed => 50.0, :speedMax => 60.0, :color => 0x0089eb },
+    { :speed => 0.0, :speedMax => 10.0, :color => 0x0084ff },
+    { :speed => 10.0, :speedMax => 20.0, :color => 0x297dcc },
+    { :speed => 20.0, :speedMax => 30.0, :color => 0x3d6d99 },
+    { :speed => 30.0, :speedMax => 40.0, :color => 0x3d5266 },
+    { :speed => 40.0, :speedMax => 50.0, :color => 0x292e33 },
+    { :speed => 50.0, :speedMax => 60.0, :color => 0x000000 },
   ];
 
   function draw(dc, field) {
