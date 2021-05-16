@@ -23,12 +23,12 @@ class ArcField {
   ];
 
   const SPEED_ZONES = [
-    { :speed => 0.0, :speedMax => 10.0 },
-    { :speed => 10.8, :speedMax => 20.0 },
-    { :speed => 20.8, :speedMax => 30.0 },
-    { :speed => 30.8, :speedMax => 40.0 },
-    { :speed => 40.8, :speedMax => 50.0 },
-    { :speed => 50.8, :speedMax => 60.0 },
+    { :speed => 0.0, :speedMax => 10.0, :color => 0x005999 },
+    { :speed => 10.0, :speedMax => 20.0, :color => 0x0089eb },
+    { :speed => 20.0, :speedMax => 30.0, :color => 0x005999 },
+    { :speed => 30.0, :speedMax => 40.0, :color => 0x0089eb },
+    { :speed => 40.0, :speedMax => 50.0, :color => 0x005999 },
+    { :speed => 50.0, :speedMax => 60.0, :color => 0x0089eb },
   ];
 
   function draw(dc, field) {
@@ -94,7 +94,7 @@ class ArcField {
         SPEED_ZONES[i].get(:speed),
         SPEED_ZONES[i].get(:speedMax),
         false,
-        0x0084E3
+        SPEED_ZONES[i].get(:color)
       );
     }
   }

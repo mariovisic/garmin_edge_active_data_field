@@ -35,7 +35,7 @@ class ActiveDataFieldsSelector {
         return mapField(fields[i]);
       }
     }
-    return mapField(fields[fields.size() - 1]);
+    return mapField(fields[0]);
   }
 
   function secondaryFields() {
