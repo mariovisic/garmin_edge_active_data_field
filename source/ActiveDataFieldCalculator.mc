@@ -105,7 +105,9 @@ class ActiveDataFieldCalculator {
   }
 
   function radiansToHeading(radians) {
-    if(radians < 2*3.14 / 8 * 1) {
+    if(radians == null) {
+      return "---";
+    } else if(radians < 2*3.14 / 8 * 1) {
       return "N";
     } else if(radians < 2*3.14 / 8 * 2) {
       return "NE";
