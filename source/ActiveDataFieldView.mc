@@ -18,6 +18,7 @@ class ActiveDataFieldView extends Ui.DataField
     clockTime = System.getClockTime();
     elapsedTime = info.elapsedTime;
     calculator.logInfo(info);
+    calculator.updateMode();
   }
 
   function onUpdate(dc) {
