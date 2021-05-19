@@ -6,7 +6,7 @@ class ElapsedTimeField {
   var seconds;
 
   function draw(dc, elapsedTime) {
-    dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
+    dc.setColor(Colors.get(:text), Graphics.COLOR_TRANSPARENT);
 
     elapsedTime = elapsedTime / 1000;
     hours = (elapsedTime / 3600);

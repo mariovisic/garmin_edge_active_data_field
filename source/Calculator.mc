@@ -1,8 +1,9 @@
 using Toybox.System;
 
-class ActiveDataFieldCalculator {
+class Calculator {
   public var mode;
 
+  // FIXME: Move these to a shared external class
   hidden var historicalValues = {
     :heartRate => new [5],
     :averageHeartRate => new [1],
@@ -100,6 +101,8 @@ class ActiveDataFieldCalculator {
     }
   }
 
+  // FIXME: This should keep track of which values have ever had a value set
+  // which is not NULL, rather than checking if the current value is NULL;
   function hasField(name) {
     return(getRawValue(name) != null);
   }

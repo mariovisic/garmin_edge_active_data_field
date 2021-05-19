@@ -1,22 +1,23 @@
 using Toybox.System;
 
-class ActiveDataFieldsSelector {
+class FieldSelector {
   hidden var calculator;
 
+  // FIXME: Move these to a shared external class
   const FIELD_DATA = {
-    :power => { :color => Graphics.COLOR_PURPLE, :label => "Power", :unit => "W", :format => "%d" },
-    :averagePower => { :color => Graphics.COLOR_PURPLE, :label => "Avg Power", :unit => "W", :format => "%d" },
-    :maxPower => { :color => Graphics.COLOR_PURPLE, :label => "Max Power", :unit => "W", :format => "%d" },
-    :heartRate => { :color => Graphics.COLOR_RED, :label => "Heart Rate", :unit => "bpm", :format => "%d" },
-    :averageHeartRate => { :color => Graphics.COLOR_RED, :label => "Avg HR", :unit => "bpm", :format => "%d" },
-    :speed => { :color => Graphics.COLOR_BLUE, :label => "Speed", :unit => "km/h", :format => "%d" },
-    :averageSpeed => { :color => Graphics.COLOR_BLUE, :label => "Avg Speed", :unit => "km/h", :format => "%d" },
-    :cadence => { :color => Graphics.COLOR_DK_GREEN, :label => "Cadence", :unit => "rpm", :format => "%d" },
-    :averageCadence => { :color => Graphics.COLOR_DK_GREEN, :label => "Avg Cadence", :unit => "rpm", :format => "%d" },
-    :distance => { :color => Graphics.COLOR_BLACK, :label => "Distance", :unit => "km", :format => "%.1f" },
-    :heading => { :color => Graphics.COLOR_BLACK, :label => "Heading", :unit => "", :format => null },
-    :altitude => { :color => Graphics.COLOR_BLACK, :label => "Altitude", :unit => "m", :format => "%d" },
-    :totalAscent => { :color => Graphics.COLOR_BLACK, :label => "Total Ascent", :unit => "m", :format => "%d" },
+    :power => { :color => :power, :label => "Power", :unit => "W", :format => "%d" },
+    :averagePower => { :color => :power, :label => "Avg Power", :unit => "W", :format => "%d" },
+    :maxPower => { :color => :power, :label => "Max Power", :unit => "W", :format => "%d" },
+    :heartRate => { :color => :heartRate, :label => "Heart Rate", :unit => "bpm", :format => "%d" },
+    :averageHeartRate => { :color => :heartRate, :label => "Avg HR", :unit => "bpm", :format => "%d" },
+    :speed => { :color => :speed, :label => "Speed", :unit => "km/h", :format => "%d" },
+    :averageSpeed => { :color => :speed, :label => "Avg Speed", :unit => "km/h", :format => "%d" },
+    :cadence => { :color => :cadence, :label => "Cadence", :unit => "rpm", :format => "%d" },
+    :averageCadence => { :color => :cadence, :label => "Avg Cadence", :unit => "rpm", :format => "%d" },
+    :distance => { :color => :text, :label => "Distance", :unit => "km", :format => "%.1f" },
+    :heading => { :color => :text, :label => "Heading", :unit => "", :format => null },
+    :altitude => { :color => :text, :label => "Altitude", :unit => "m", :format => "%d" },
+    :totalAscent => { :color => :text, :label => "Total Ascent", :unit => "m", :format => "%d" },
   };
 
   const FIELDS_FOR_MODE = {

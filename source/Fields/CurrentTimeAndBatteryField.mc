@@ -5,7 +5,7 @@ class CurrentTimeAndBatteryField {
   var hour;
 
   function draw(dc, clockTime, batteryPercentage) {
-    dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
+    dc.setColor(Colors.get(:text), Graphics.COLOR_TRANSPARENT);
 
     amOrPm = clockTime.hour < 12 ? "am" : "pm";
     hour = clockTime.hour % 12 == 0 ? 12 : clockTime.hour % 12;

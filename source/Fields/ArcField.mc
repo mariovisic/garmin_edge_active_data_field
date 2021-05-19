@@ -5,34 +5,34 @@ class ArcField {
   const MAX_SPEED = 60;
 
   const POWER_ZONES = [
-    { :power => 0.0, :powerMax => 0.548, :color => 0x777777 }, // Active Recovery
-    { :power => 0.55, :powerMax => 0.758, :color => 0x8EC6FF }, // Endurance
-    { :power => 0.76, :powerMax => 0.908, :color => 0x00A746 }, // Tempo
-    { :power => 0.91, :powerMax => 1.058, :color => 0xc2c219 }, // Threshold
-    { :power => 1.06, :powerMax => 1.208, :color => 0xFF6111 }, // VO2 Max
-    { :power => 1.21, :powerMax => 1.508, :color => 0xFF0F17 }, // Anaerobic
-    { :power => 1.51, :powerMax => 5, :color => 0xBC0722 } // Neuromuscular
+    { :power => 0.0, :powerMax => 0.548, :color => :active_recovery }, // Active Recovery
+    { :power => 0.55, :powerMax => 0.758, :color => :endurance }, // Endurance
+    { :power => 0.76, :powerMax => 0.908, :color => :tempo }, // Tempo
+    { :power => 0.91, :powerMax => 1.058, :color => :threshold }, // Threshold
+    { :power => 1.06, :powerMax => 1.208, :color => :vo2_max }, // VO2 Max
+    { :power => 1.21, :powerMax => 1.508, :color => :anaerobic }, // Anaerobic
+    { :power => 1.51, :powerMax => 5, :color => :neuromuscular } // Neuromuscular
   ];
 
   const HEART_RATE_ZONES = [
-    { :heartRate => 0.50, :heartRateMax => 0.598, :color => 0x777777 }, // Active Recovery
-    { :heartRate => 0.60, :heartRateMax => 0.698, :color => 0x8EC6FF }, // Endurance
-    { :heartRate => 0.70, :heartRateMax => 0.798, :color => 0x00A746 }, // Tempo
-    { :heartRate => 0.80, :heartRateMax => 0.898, :color => 0xc2c219 }, // Threshold
-    { :heartRate => 0.90, :heartRateMax => 1.00, :color => 0xFF6111 }, // VO2 Max
+    { :heartRate => 0.50, :heartRateMax => 0.598, :color => :active_recovery }, // Active Recovery
+    { :heartRate => 0.60, :heartRateMax => 0.698, :color => :endurance }, // Endurance
+    { :heartRate => 0.70, :heartRateMax => 0.798, :color => :tempo }, // Tempo
+    { :heartRate => 0.80, :heartRateMax => 0.898, :color => :threshold }, // Threshold
+    { :heartRate => 0.90, :heartRateMax => 1.00, :color => :vo2_max }, // VO2 Max
   ];
 
   const SPEED_ZONES = [
-    { :speed => 0.0, :speedMax => 10.0, :color => 0x0084ff },
-    { :speed => 10.0, :speedMax => 20.0, :color => 0x297dcc },
-    { :speed => 20.0, :speedMax => 30.0, :color => 0x3d6d99 },
-    { :speed => 30.0, :speedMax => 40.0, :color => 0x3d5266 },
-    { :speed => 40.0, :speedMax => 50.0, :color => 0x292e33 },
-    { :speed => 50.0, :speedMax => 60.0, :color => 0x000000 },
+    { :speed => 0.0, :speedMax => 10.0, :color => :speed_10 },
+    { :speed => 10.0, :speedMax => 20.0, :color => :speed_20 },
+    { :speed => 20.0, :speedMax => 30.0, :color => :speed_30 },
+    { :speed => 30.0, :speedMax => 40.0, :color => :speed_40 },
+    { :speed => 40.0, :speedMax => 50.0, :color => :speed_50 },
+    { :speed => 50.0, :speedMax => 60.0, :color => :speed_60 },
   ];
 
   function draw(dc, field) {
-    dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
+    dc.setColor(Colors.get(:text), Graphics.COLOR_TRANSPARENT);
 
     if(field.get(:name) == :power) {
       drawPower(dc, field);
@@ -117,7 +117,7 @@ class ArcField {
           dc.setPenWidth(14);
           arcRadius = (dc.getWidth() / 3);
         }
-        dc.setColor(color, Graphics.COLOR_TRANSPARENT);
+        dc.setColor(Colors.get(color), Graphics.COLOR_TRANSPARENT);
 
         dc.drawArc(
           (dc.getWidth() / 2),

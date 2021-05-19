@@ -27,7 +27,7 @@ class SecondaryFields {
     dc.setPenWidth(2);
 
     for( var i = 0; i < fields.size(); i++) {
-      dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
+      dc.setColor(Colors.get(:text), Graphics.COLOR_TRANSPARENT);
 
       dc.drawText(
         ((dc.getWidth() / 18) * COORDINATES[i].get(:text_x)) + 2,
@@ -56,7 +56,7 @@ class SecondaryFields {
         Graphics.TEXT_JUSTIFY_CENTER
       );
 
-      dc.setColor(fields[i].get(:color), Graphics.COLOR_TRANSPARENT);
+      dc.setColor(Colors.get(fields[i].get(:color)), Graphics.COLOR_TRANSPARENT);
 
       dc.drawRoundedRectangle(
         ((dc.getWidth() / 18) * COORDINATES[i].get(:box_x)) - 4,
