@@ -110,22 +110,24 @@ class Calculator {
   function radiansToHeading(radians) {
     if(radians == null) {
       return "---";
-    } else if(radians < 2*3.14 / 8 * 1) {
-      return "N";
-    } else if(radians < 2*3.14 / 8 * 2) {
-      return "NE";
-    } else if(radians < 2*3.14 / 8 * 3) {
-      return "E";
-    } else if(radians < 2*3.14 / 8 * 4) {
-      return "SE";
-    } else if(radians < 2*3.14 / 8 * 5) {
+    } else if(Math.toDegrees(radians) < -157.5) {
       return "S";
-    } else if(radians < 2*3.14 / 8 * 6) {
+    } else if(Math.toDegrees(radians) < -112.5) {
       return "SW";
-    } else if(radians < 2*3.14 / 8 * 7) {
+    } else if(Math.toDegrees(radians) < -67.5) {
       return "W";
-    } else {
+    } else if(Math.toDegrees(radians) < -22.5) {
       return "NW";
+    } else if(Math.toDegrees(radians) < 22.5) {
+      return "N";
+    } else if(Math.toDegrees(radians) < 67.5) {
+      return "NE";
+    } else if(Math.toDegrees(radians) < 112.5) {
+      return "E";
+    } else if(Math.toDegrees(radians) < 157.5) {
+      return "SE";
+    } else {
+      return "S";
     }
   }
 }
