@@ -56,7 +56,6 @@ class ArcField {
         FTP * 1.5,
         zone.get(:power) * FTP,
         zone.get(:powerMax) * FTP,
-        i > 0 && power < zone.get(:powerMax),
         zone.get(:color)
       );
     }
@@ -76,7 +75,6 @@ class ArcField {
         MAX_HR,
         zone.get(:heartRate) * MAX_HR,
         zone.get(:heartRateMax) * MAX_HR,
-        i > 0 && heartRate < zone.get(:heartRateMax),
         zone.get(:color)
       );
     }
@@ -93,13 +91,12 @@ class ArcField {
         MAX_SPEED,
         SPEED_ZONES[i].get(:speed),
         SPEED_ZONES[i].get(:speedMax),
-        false,
         SPEED_ZONES[i].get(:color)
       );
     }
   }
 
-  hidden function drawRawBand(dc, startValueOffset, currentValue, maximumValue, zoneStart, zoneFinish, highlightCurrentZone, color) {
+  hidden function drawRawBand(dc, startValueOffset, currentValue, maximumValue, zoneStart, zoneFinish, color) {
     if(currentValue > zoneStart) {
       if(currentValue < zoneFinish) {
         zoneFinish = currentValue;
@@ -110,19 +107,13 @@ class ArcField {
       var ArcFinishAngle = 175 + ((zoneFinish - startValueOffset) / (maximumValue - startValueOffset) * 190);
 
       if(ArcFinishAngle > ArcStartAngle + 1) {
-        if(highlightCurrentZone) {
-          dc.setPenWidth(24);
-          arcRadius = (dc.getWidth() / 3) - 6;
-        } else {
-          dc.setPenWidth(14);
-          arcRadius = (dc.getWidth() / 3);
-        }
+        dc.setPenWidth(14);
         dc.setColor(Colors.get(color), Graphics.COLOR_TRANSPARENT);
 
         dc.drawArc(
           (dc.getWidth() / 2),
           (dc.getHeight() / 18) * 9,
-          arcRadius,
+          (dc.getWidth() / 3),
           Graphics.ARC_COUNTER_CLOCKWISE,
           ArcStartAngle,
           ArcFinishAngle

@@ -13,7 +13,7 @@ class CurrentTimeAndBatteryField {
     dc.drawText(
       (dc.getWidth() / 24),
       (dc.getWidth() / 24),
-      Graphics.FONT_SYSTEM_TINY,
+      Graphics.FONT_TINY,
       hour.format("%2d") + ":" + clockTime.min.format("%02d") + amOrPm + " / " + batteryPercentage.format("%2d") + "%",
       Graphics.TEXT_JUSTIFY_LEFT
     );

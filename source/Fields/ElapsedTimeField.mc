@@ -16,7 +16,7 @@ class ElapsedTimeField {
     dc.drawText(
       (dc.getWidth() / 24) * 23,
       (dc.getWidth() / 24),
-      Graphics.FONT_SYSTEM_TINY,
+      Graphics.FONT_TINY,
       hours.format("%2d") + ":" + minutes.format("%02d") + ":" + seconds.format("%02d"),
       Graphics.TEXT_JUSTIFY_RIGHT
     );

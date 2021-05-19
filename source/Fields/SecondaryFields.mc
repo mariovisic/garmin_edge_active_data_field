@@ -2,23 +2,23 @@ class SecondaryFields {
   const COORDINATES = [
     { :text_x => 4.5,
       :text_y => 2.875,
-      :box_x => 1,
-      :box_y => 2.5,
+      :line_x => 2,
+      :line_y => 4,
     },
     { :text_x => 13.5,
       :text_y => 2.875,
-      :box_x => 10,
-      :box_y => 2.5,
+      :line_x => 11,
+      :line_y => 4,
     },
     { :text_x => 4.5,
       :text_y => 15.125,
-      :box_x => 1,
-      :box_y => 14.75,
+      :line_x => 2,
+      :line_y => 16.25,
     },
     { :text_x => 13.5,
       :text_y => 15.125,
-      :box_x => 10,
-      :box_y => 14.75,
+      :line_x => 11,
+      :line_y => 16.25,
     },
 
   ];
@@ -31,39 +31,41 @@ class SecondaryFields {
 
       dc.drawText(
         ((dc.getWidth() / 18) * COORDINATES[i].get(:text_x)) + 2,
-        ((dc.getHeight() / 18) * COORDINATES[i].get(:text_y)) + 13,
-        Graphics.FONT_LARGE,
+        ((dc.getHeight() / 18) * COORDINATES[i].get(:text_y)) + 18,
+        Graphics.FONT_NUMBER_MILD,
         fields[i].get(:formattedValue),
         Graphics.TEXT_JUSTIFY_CENTER
       );
 
-      var valueDimension = dc.getTextDimensions(fields[i].get(:formattedValue), Graphics.FONT_LARGE);
+      var valueDimension = dc.getTextDimensions(fields[i].get(:formattedValue), Graphics.FONT_NUMBER_MILD);
       var unitDimension = dc.getTextDimensions(fields[i].get(:unit), Graphics.FONT_XTINY);
 
       dc.drawText(
         ((dc.getWidth() / 18) * COORDINATES[i].get(:text_x)) + (valueDimension[0] / 2) + (dc.getWidth() / 100) + 2,
-        ((dc.getHeight() / 18) * COORDINATES[i].get(:text_y)) + valueDimension[1] - unitDimension[1] + 8,
+        ((dc.getHeight() / 18) * COORDINATES[i].get(:text_y)) + valueDimension[1] - unitDimension[1] + 13,
         Graphics.FONT_XTINY,
         fields[i].get(:unit),
         Graphics.TEXT_JUSTIFY_LEFT
       );
 
+      dc.setColor(Colors.get(fields[i].get(:color)), Graphics.COLOR_TRANSPARENT);
+
+
       dc.drawText(
         ((dc.getWidth() / 18) * COORDINATES[i].get(:text_x)) + 2,
-        ((dc.getHeight() / 18) * COORDINATES[i].get(:text_y)) - 4,
+        ((dc.getHeight() / 18) * COORDINATES[i].get(:text_y)) - 6,
         Graphics.FONT_SMALL,
         fields[i].get(:label),
         Graphics.TEXT_JUSTIFY_CENTER
       );
 
-      dc.setColor(Colors.get(fields[i].get(:color)), Graphics.COLOR_TRANSPARENT);
+      dc.setPenWidth(3);
 
-      dc.drawRoundedRectangle(
-        ((dc.getWidth() / 18) * COORDINATES[i].get(:box_x)) - 4,
-        (dc.getHeight() / 18) * COORDINATES[i].get(:box_y),
-        (dc.getWidth() / 18) * 8,
-        (dc.getHeight() / 18) * 4,
-        4
+      dc.drawLine(
+        ((dc.getWidth() / 18) * COORDINATES[i].get(:line_x)) - 4,
+        (dc.getHeight() / 18) * COORDINATES[i].get(:line_y),
+        ((dc.getWidth() / 18) * COORDINATES[i].get(:line_x)) - 4 + ((dc.getWidth() / 18) * 6),
+        (dc.getHeight() / 18) * COORDINATES[i].get(:line_y)
       );
     }
   }
