@@ -11,7 +11,7 @@ class FieldSelector {
     :heartRate => { :color => :heartRate, :label => "Heart Rate", :unit => "bpm", :format => "%d" },
     :averageHeartRate => { :color => :heartRate, :label => "Avg HR", :unit => "bpm", :format => "%d" },
     :speed => { :color => :speed, :label => "Speed", :unit => "km/h", :format => "%d" },
-    :averageSpeed => { :color => :speed, :label => "Avg Speed", :unit => "km/h", :format => "%d" },
+    :averageSpeed => { :color => :speed, :label => "Avg Speed", :unit => "km/h", :format => "%.1f" },
     :cadence => { :color => :cadence, :label => "Cadence", :unit => "rpm", :format => "%d" },
     :averageCadence => { :color => :cadence, :label => "Avg Cadence", :unit => "rpm", :format => "%d" },
     :distance => { :color => :text, :label => "Distance", :unit => "km", :format => "%.1f" },
