@@ -17,7 +17,7 @@ class Calculator {
     :averageSpeed => new [1],
     :heading => new [1],
     :altitude => new [5],
-    :totalAscent => new [1],
+    :totalAscent => new [5],
   };
 
   function initialize() {
