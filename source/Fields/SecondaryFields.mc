@@ -27,7 +27,7 @@ class SecondaryFields {
     dc.setPenWidth(2);
 
     for( var i = 0; i < fields.size(); i++) {
-      dc.setColor(Colors.get(:text), Graphics.COLOR_TRANSPARENT);
+      dc.setColor(Colors.get([Graphics.COLOR_BLACK, Graphics.COLOR_WHITE]), Graphics.COLOR_TRANSPARENT);
 
       dc.drawText(
         ((dc.getWidth() / 18) * COORDS[i].get(:text_x)) + 2,
@@ -48,7 +48,7 @@ class SecondaryFields {
         Graphics.TEXT_JUSTIFY_LEFT
       );
 
-      dc.setColor(Colors.get(fields[i].get(:color)), Graphics.COLOR_TRANSPARENT);
+      dc.setColor(Colors.get(fields[i].get(:colors)), Graphics.COLOR_TRANSPARENT);
 
 
       dc.drawText(

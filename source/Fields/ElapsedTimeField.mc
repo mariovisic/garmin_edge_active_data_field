@@ -2,7 +2,7 @@ using Toybox.Graphics;
 
 module ElapsedTimeField {
   function draw(dc, elapsedTime) {
-    dc.setColor(Colors.get(:text), Graphics.COLOR_TRANSPARENT);
+    dc.setColor(Colors.get([Graphics.COLOR_BLACK, Graphics.COLOR_WHITE]), Graphics.COLOR_TRANSPARENT);
 
     elapsedTime = elapsedTime / 1000;
     var hours = (elapsedTime / 3600);

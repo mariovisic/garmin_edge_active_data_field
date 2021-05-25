@@ -1,5 +1,3 @@
-using Toybox.System;
-
 class Calculator {
   public var mode;
 

@@ -2,7 +2,7 @@ using Toybox.Graphics;
 
 module CurrentTimeAndBatteryField {
   function draw(dc, clockTime, batteryPercentage) {
-    dc.setColor(Colors.get(:text), Graphics.COLOR_TRANSPARENT);
+    dc.setColor(Colors.get([Graphics.COLOR_BLACK, Graphics.COLOR_WHITE]), Graphics.COLOR_TRANSPARENT);
 
     var amOrPm = clockTime.hour < 12 ? "am" : "pm";
     var hour = clockTime.hour % 12 == 0 ? 12 : clockTime.hour % 12;

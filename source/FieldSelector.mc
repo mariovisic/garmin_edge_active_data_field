@@ -1,23 +1,21 @@
-using Toybox.System;
-
 class FieldSelector {
   hidden var calculator;
 
   // FIXME: Move these to a shared external class
   const FIELD_DATA = {
-    :power => { :color => :power, :label => "Power", :unit => "W", :format => "%d" },
-    :averagePower => { :color => :power, :label => "Avg Power", :unit => "W", :format => "%d" },
-    :maxPower => { :color => :power, :label => "Max Power", :unit => "W", :format => "%d" },
-    :heartRate => { :color => :heartRate, :label => "Heart Rate", :unit => "bpm", :format => "%d" },
-    :averageHeartRate => { :color => :heartRate, :label => "Avg HR", :unit => "bpm", :format => "%d" },
-    :speed => { :color => :speed, :label => "Speed", :unit => "km/h", :format => "%d" },
-    :averageSpeed => { :color => :speed, :label => "Avg Speed", :unit => "km/h", :format => "%.1f" },
-    :cadence => { :color => :cadence, :label => "Cadence", :unit => "rpm", :format => "%d" },
-    :averageCadence => { :color => :cadence, :label => "Avg Cadence", :unit => "rpm", :format => "%d" },
-    :distance => { :color => :text, :label => "Distance", :unit => "km", :format => "%.1f" },
-    :heading => { :color => :text, :label => "Heading", :unit => "", :format => null },
-    :altitude => { :color => :text, :label => "Altitude", :unit => "m", :format => "%d" },
-    :totalAscent => { :color => :text, :label => "Total Ascent", :unit => "m", :format => "%d" },
+    :power => { :colors => [ Graphics.COLOR_PURPLE, Graphics.COLOR_PURPLE ], :label => "Power", :unit => "W", :format => "%d" },
+    :averagePower => { :colors => [ Graphics.COLOR_PURPLE, Graphics.COLOR_PURPLE ], :label => "Avg Power", :unit => "W", :format => "%d" },
+    :maxPower => { :colors => [ Graphics.COLOR_PURPLE, Graphics.COLOR_PURPLE ], :label => "Max Power", :unit => "W", :format => "%d" },
+    :heartRate => { :colors => [ Graphics.COLOR_RED, Graphics.COLOR_RED ], :label => "Heart Rate", :unit => "bpm", :format => "%d" },
+    :averageHeartRate => { :colors => [ Graphics.COLOR_RED, Graphics.COLOR_RED ], :label => "Avg HR", :unit => "bpm", :format => "%d" },
+    :speed => { :colors => [ Graphics.COLOR_BLUE, Graphics.COLOR_BLUE ], :label => "Speed", :unit => "km/h", :format => "%d" },
+    :averageSpeed => { :colors => [ Graphics.COLOR_BLUE, Graphics.COLOR_BLUE ], :label => "Avg Speed", :unit => "km/h", :format => "%.1f" },
+    :cadence => { :colors => [ Graphics.COLOR_DK_GREEN, Graphics.COLOR_GREEN ], :label => "Cadence", :unit => "rpm", :format => "%d" },
+    :averageCadence => { :colors => [ Graphics.COLOR_DK_GREEN, Graphics.COLOR_GREEN ], :label => "Avg Cadence", :unit => "rpm", :format => "%d" },
+    :distance => { :colors => [ Graphics.COLOR_BLACK, Graphics.COLOR_WHITE ], :label => "Distance", :unit => "km", :format => "%.1f" },
+    :heading => { :colors => [ Graphics.COLOR_BLACK, Graphics.COLOR_WHITE ], :label => "Heading", :unit => "", :format => null },
+    :altitude => { :colors => [ Graphics.COLOR_BLACK, Graphics.COLOR_WHITE ], :label => "Altitude", :unit => "m", :format => "%d" },
+    :totalAscent => { :colors => [ Graphics.COLOR_BLACK, Graphics.COLOR_WHITE ], :label => "Total Ascent", :unit => "m", :format => "%d" },
   };
 
   const FIELDS_FOR_MODE = {
@@ -62,7 +60,7 @@ class FieldSelector {
   hidden function mapField(field) {
     return({
       :name => field,
-      :color => FIELD_DATA.get(field).get(:color),
+      :colors => FIELD_DATA.get(field).get(:colors),
       :label => FIELD_DATA.get(field).get(:label),
       :unit => FIELD_DATA.get(field).get(:unit),
       :value => calculator.getLatestValue(field),
