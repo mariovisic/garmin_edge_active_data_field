@@ -1,5 +1,5 @@
 class SecondaryFields {
-  const COORDINATES = [
+  const COORDS = [
     { :text_x => 4.5,
       :text_y => 2.875,
       :line_x => 2,
@@ -30,8 +30,8 @@ class SecondaryFields {
       dc.setColor(Colors.get(:text), Graphics.COLOR_TRANSPARENT);
 
       dc.drawText(
-        ((dc.getWidth() / 18) * COORDINATES[i].get(:text_x)) + 2,
-        ((dc.getHeight() / 18) * COORDINATES[i].get(:text_y)) + 18,
+        ((dc.getWidth() / 18) * COORDS[i].get(:text_x)) + 2,
+        ((dc.getHeight() / 18) * COORDS[i].get(:text_y)) + 18,
         Graphics.FONT_NUMBER_MILD,
         fields[i].get(:formattedValue),
         Graphics.TEXT_JUSTIFY_CENTER
@@ -41,8 +41,8 @@ class SecondaryFields {
       var unitDimension = dc.getTextDimensions(fields[i].get(:unit), Graphics.FONT_XTINY);
 
       dc.drawText(
-        ((dc.getWidth() / 18) * COORDINATES[i].get(:text_x)) + (valueDimension[0] / 2) + (dc.getWidth() / 100) + 2,
-        ((dc.getHeight() / 18) * COORDINATES[i].get(:text_y)) + valueDimension[1] - unitDimension[1] + 13,
+        ((dc.getWidth() / 18) * COORDS[i].get(:text_x)) + (valueDimension[0] / 2) + (dc.getWidth() / 100) + 2,
+        ((dc.getHeight() / 18) * COORDS[i].get(:text_y)) + valueDimension[1] - unitDimension[1] + 13,
         Graphics.FONT_XTINY,
         fields[i].get(:unit),
         Graphics.TEXT_JUSTIFY_LEFT
@@ -52,8 +52,8 @@ class SecondaryFields {
 
 
       dc.drawText(
-        ((dc.getWidth() / 18) * COORDINATES[i].get(:text_x)) + 2,
-        ((dc.getHeight() / 18) * COORDINATES[i].get(:text_y)) - 6,
+        ((dc.getWidth() / 18) * COORDS[i].get(:text_x)) + 2,
+        ((dc.getHeight() / 18) * COORDS[i].get(:text_y)) - 6,
         Graphics.FONT_SMALL,
         fields[i].get(:label),
         Graphics.TEXT_JUSTIFY_CENTER
@@ -62,10 +62,10 @@ class SecondaryFields {
       dc.setPenWidth(3);
 
       dc.drawLine(
-        ((dc.getWidth() / 18) * COORDINATES[i].get(:line_x)) - 4,
-        (dc.getHeight() / 18) * COORDINATES[i].get(:line_y),
-        ((dc.getWidth() / 18) * COORDINATES[i].get(:line_x)) - 4 + ((dc.getWidth() / 18) * 6),
-        (dc.getHeight() / 18) * COORDINATES[i].get(:line_y)
+        ((dc.getWidth() / 18) * COORDS[i].get(:line_x)) - 4,
+        (dc.getHeight() / 18) * COORDS[i].get(:line_y),
+        ((dc.getWidth() / 18) * COORDS[i].get(:line_x)) - 4 + ((dc.getWidth() / 18) * 6),
+        (dc.getHeight() / 18) * COORDS[i].get(:line_y)
       );
     }
   }

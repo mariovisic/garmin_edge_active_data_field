@@ -1,17 +1,13 @@
 using Toybox.Graphics;
 
-class ElapsedTimeField {
-  var hours;
-  var minutes;
-  var seconds;
-
+module ElapsedTimeField {
   function draw(dc, elapsedTime) {
     dc.setColor(Colors.get(:text), Graphics.COLOR_TRANSPARENT);
 
     elapsedTime = elapsedTime / 1000;
-    hours = (elapsedTime / 3600);
-    minutes = (elapsedTime - (hours * 3600)) / 60;
-    seconds = (elapsedTime - (hours * 3600) - (minutes * 60));
+    var hours = (elapsedTime / 3600);
+    var minutes = (elapsedTime - (hours * 3600)) / 60;
+    var seconds = (elapsedTime - (hours * 3600) - (minutes * 60));
 
     dc.drawText(
       (dc.getWidth() / 24) * 23,
