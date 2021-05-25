@@ -1,8 +1,10 @@
-class Calculator {
-  public var mode;
+using Toybox.Math;
+
+module Calculator {
+  var mode = :flat;
 
   // FIXME: Move these to a shared external class
-  hidden var historicalValues = {
+  var historicalValues = {
     :heartRate => new [5],
     :averageHeartRate => new [1],
     :power => new [5],
@@ -18,12 +20,7 @@ class Calculator {
     :totalAscent => new [5],
   };
 
-  function initialize() {
-    mode = :flat;
-  }
-
   function logInfo(info) {
-
     logValue(:heartRate, info.currentHeartRate, 5, null);
     logValue(:averageHeartRate, info.averageHeartRate, 1, null);
     logValue(:power, info.currentPower, 5, null);
@@ -67,7 +64,7 @@ class Calculator {
     }
   }
 
-  hidden function logValue(name, value, numValuesToKeep, multiplier) {
+  function logValue(name, value, numValuesToKeep, multiplier) {
     if (value != null) {
       if(multiplier == null) {
         historicalValues.get(name).add(value);
@@ -79,7 +76,7 @@ class Calculator {
     }
   }
 
-  hidden function getRawValue(name) {
+  function getRawValue(name) {
     return historicalValues.get(name).slice(-1, null)[0];
   }
 

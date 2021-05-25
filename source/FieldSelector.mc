@@ -1,6 +1,4 @@
 class FieldSelector {
-  hidden var calculator;
-
   // FIXME: Move these to a shared external class
   const FIELD_DATA = {
     :power => { :colors => [ Graphics.COLOR_PURPLE, Graphics.COLOR_PURPLE ], :label => "Power", :unit => "W", :format => "%d" },
@@ -23,14 +21,10 @@ class FieldSelector {
     :flat => [ :power, :heartRate, :speed, :distance, :cadence, :heading, :altitude, :totalAscent  ],
   };
 
-  function initialize(_calculator) {
-    calculator = _calculator;
-  }
-
   function mainField() {
-    var fields = FIELDS_FOR_MODE[calculator.mode];
+    var fields = FIELDS_FOR_MODE[Calculator.mode];
     for (var i = 0; i < fields.size() - 1; i++) {
-      if(calculator.hasField(fields[i])) {
+      if(Calculator.hasField(fields[i])) {
         return mapField(fields[i]);
       }
     }
@@ -38,10 +32,10 @@ class FieldSelector {
   }
 
   function secondaryFields() {
-    var fields = FIELDS_FOR_MODE[calculator.mode];
+    var fields = FIELDS_FOR_MODE[Calculator.mode];
     var secondaryFields = [];
     for (var i = 0; i < fields.size() - 1; i++) {
-      if(calculator.hasField(fields[i])) {
+      if(Calculator.hasField(fields[i])) {
         secondaryFields.add(fields[i]);
       }
     }
@@ -63,8 +57,8 @@ class FieldSelector {
       :colors => FIELD_DATA.get(field).get(:colors),
       :label => FIELD_DATA.get(field).get(:label),
       :unit => FIELD_DATA.get(field).get(:unit),
-      :value => calculator.getLatestValue(field),
-      :formattedValue => calculator.getLatestFormattedValue(field, FIELD_DATA.get(field).get(:format))
+      :value => Calculator.getLatestValue(field),
+      :formattedValue => Calculator.getLatestFormattedValue(field, FIELD_DATA.get(field).get(:format))
     });
   }
 }

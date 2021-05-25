@@ -7,7 +7,6 @@ class ActiveDataFieldView extends Ui.DataField
   hidden var batteryPercentage;
   hidden var clockTime;
   hidden var elapsedTime;
-  hidden var calculator = new Calculator();
 
   function initialize() {
     DataField.initialize();
@@ -17,13 +16,13 @@ class ActiveDataFieldView extends Ui.DataField
     batteryPercentage = System.getSystemStats().battery;
     clockTime = System.getClockTime();
     elapsedTime = info.elapsedTime;
-    calculator.logInfo(info);
-    calculator.updateMode();
+    Calculator.logInfo(info);
+    Calculator.updateMode();
   }
 
   function onUpdate(dc) {
     Colors.backgroundColor = getBackgroundColor();
-    var fieldsSelector = new FieldSelector(calculator);
+    var fieldsSelector = new FieldSelector();
 
     ElapsedTimeField.draw(dc, elapsedTime);
     CurrentTimeAndBatteryField.draw(dc, clockTime, batteryPercentage);
