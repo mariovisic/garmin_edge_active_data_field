@@ -6,24 +6,24 @@ class ArcField {
 
   const POWER_ZONES = [
     { :power => 0.0, :powerMax => 0.548, :colors => [ 0x777777, 0x999999 ] }, // Active Recovery
-    { :power => 0.55, :powerMax => 0.758, :colors => [ 0x8EC6FF, 0x8EC6FF ] }, // Endurance
-    { :power => 0.76, :powerMax => 0.908, :colors => [ 0x00A746, 0x00A746 ] }, // Tempo
-    { :power => 0.91, :powerMax => 1.058, :colors => [ 0xc2c219, 0xc2c219 ] }, // Threshold
-    { :power => 1.06, :powerMax => 1.208, :colors => [ 0xFF6111, 0xFF6111 ] }, // VO2 Max
-    { :power => 1.21, :powerMax => 1.508, :colors => [ 0xFF0F17, 0xFF0F17 ] }, // Anaerobic
-    { :power => 1.51, :powerMax => 5, :colors => [ 0xBC0722, 0xBC0722 ] } // Neuromuscular
+    { :power => 0.55, :powerMax => 0.758, :colors => [ 0x8EC6FF ] }, // Endurance
+    { :power => 0.76, :powerMax => 0.908, :colors => [ 0x00A746 ] }, // Tempo
+    { :power => 0.91, :powerMax => 1.058, :colors => [ 0xc2c219 ] }, // Threshold
+    { :power => 1.06, :powerMax => 1.208, :colors => [ 0xFF6111 ] }, // VO2 Max
+    { :power => 1.21, :powerMax => 1.508, :colors => [ 0xFF0F17 ] }, // Anaerobic
+    { :power => 1.51, :powerMax => 5, :colors => [ 0xBC0722 ] } // Neuromuscular
   ];
 
   const HEART_RATE_ZONES = [
     { :heartRate => 0.50, :heartRateMax => 0.598, :colors => [ 0x777777, 0x999999 ] }, // Active Recovery
-    { :heartRate => 0.60, :heartRateMax => 0.698, :colors => [ 0x8EC6FF, 0x8EC6FF ] }, // Endurance
-    { :heartRate => 0.70, :heartRateMax => 0.798, :colors => [ 0x00A746, 0x00A746 ] }, // Tempo
-    { :heartRate => 0.80, :heartRateMax => 0.898, :colors => [ 0xc2c219, 0xc2c219 ] }, // Threshold
-    { :heartRate => 0.90, :heartRateMax => 1.00, :colors => [ 0xFF6111, 0xFF6111 ] }, // VO2 Max
+    { :heartRate => 0.60, :heartRateMax => 0.698, :colors => [ 0x8EC6FF ] }, // Endurance
+    { :heartRate => 0.70, :heartRateMax => 0.798, :colors => [ 0x00A746 ] }, // Tempo
+    { :heartRate => 0.80, :heartRateMax => 0.898, :colors => [ 0xc2c219 ] }, // Threshold
+    { :heartRate => 0.90, :heartRateMax => 1.00, :colors => [ 0xFF6111 ] }, // VO2 Max
   ];
 
   const SPEED_ZONES = [
-    { :speed => 0.0, :speedMax => 10.0, :colors => [ 0x0084ff, 0x0084ff ] },
+    { :speed => 0.0, :speedMax => 10.0, :colors => [ 0x0084ff ] },
     { :speed => 10.0, :speedMax => 20.0, :colors => [ 0x297dcc, 0x339cff ] },
     { :speed => 20.0, :speedMax => 30.0, :colors => [ 0x3d6d99, 0x66b5ff ] },
     { :speed => 30.0, :speedMax => 40.0, :colors => [ 0x3d5266, 0x99ceff ] },

@@ -1,13 +1,13 @@
 class FieldSelector {
   // FIXME: Move these to a shared external class
   const FIELD_DATA = {
-    :power => { :colors => [ 0xAA00FF, 0xAA00FF ], :label => "Power", :unit => "W", :format => "%d" },
-    :averagePower => { :colors => [ 0xAA00FF, 0xAA00FF ], :label => "Avg Power", :unit => "W", :format => "%d" },
-    :maxPower => { :colors => [ 0xAA00FF, 0xAA00FF ], :label => "Max Power", :unit => "W", :format => "%d" },
-    :heartRate => { :colors => [ 0xFF0000, 0xFF0000 ], :label => "Heart Rate", :unit => "bpm", :format => "%d" },
-    :averageHeartRate => { :colors => [ 0xFF0000, 0xFF0000 ], :label => "Avg HR", :unit => "bpm", :format => "%d" },
-    :speed => { :colors => [ 0x00AAFF, 0x00AAFF ], :label => "Speed", :unit => "km/h", :format => "%d" },
-    :averageSpeed => { :colors => [ 0x00AAFF, 0x00AAFF ], :label => "Avg Speed", :unit => "km/h", :format => "%.1f" },
+    :power => { :colors => [ 0xAA00FF ], :label => "Power", :unit => "W", :format => "%d" },
+    :averagePower => { :colors => [ 0xAA00FF ], :label => "Avg Power", :unit => "W", :format => "%d" },
+    :maxPower => { :colors => [ 0xAA00FF ], :label => "Max Power", :unit => "W", :format => "%d" },
+    :heartRate => { :colors => [ 0xFF0000 ], :label => "Heart Rate", :unit => "bpm", :format => "%d" },
+    :averageHeartRate => { :colors => [ 0xFF0000 ], :label => "Avg HR", :unit => "bpm", :format => "%d" },
+    :speed => { :colors => [ 0x00AAFF ], :label => "Speed", :unit => "km/h", :format => "%d" },
+    :averageSpeed => { :colors => [ 0x00AAFF ], :label => "Avg Speed", :unit => "km/h", :format => "%.1f" },
     :cadence => { :colors => [ 0x00AA00, 0x00FF00 ], :label => "Cadence", :unit => "rpm", :format => "%d" },
     :averageCadence => { :colors => [ 0x00AA00, 0x00FF00 ], :label => "Avg Cadence", :unit => "rpm", :format => "%d" },
     :distance => { :colors => [ 0x000000, 0xffffff ], :label => "Distance", :unit => "km", :format => "%.1f" },
