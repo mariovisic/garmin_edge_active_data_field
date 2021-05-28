@@ -32,7 +32,7 @@ class ArcField {
   ];
 
   function draw(dc, field) {
-    dc.setColor(Colors.get([Graphics.COLOR_BLACK, Graphics.COLOR_WHITE]), Graphics.COLOR_TRANSPARENT);
+    dc.setColor(Colors.get([0x000000, 0xffffff]), -1);
 
     if(field.get(:name) == :power) {
       drawPower(dc, field);
@@ -108,13 +108,13 @@ class ArcField {
 
       if(ArcFinishAngle > ArcStartAngle + 1) {
         dc.setPenWidth(14);
-        dc.setColor(Colors.get(colors), Graphics.COLOR_TRANSPARENT);
+        dc.setColor(Colors.get(colors), -1);
 
         dc.drawArc(
           (dc.getWidth() / 2),
           (dc.getHeight() / 18) * 9,
           (dc.getWidth() / 3),
-          Graphics.ARC_COUNTER_CLOCKWISE,
+          0,
           ArcStartAngle,
           ArcFinishAngle
         );

@@ -1,5 +1,3 @@
-using Toybox.Application;
-
 class ActiveDataFieldApp extends Toybox.Application.AppBase {
 	function initialize() {
 		AppBase.initialize();

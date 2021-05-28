@@ -1,6 +1,4 @@
 using Toybox.WatchUi as Ui;
-using Toybox.Graphics;
-using Toybox.Lang;
 
 class ActiveDataFieldView extends Ui.DataField
 {

@@ -27,36 +27,36 @@ class SecondaryFields {
     dc.setPenWidth(2);
 
     for( var i = 0; i < fields.size(); i++) {
-      dc.setColor(Colors.get([Graphics.COLOR_BLACK, Graphics.COLOR_WHITE]), Graphics.COLOR_TRANSPARENT);
+      dc.setColor(Colors.get([0x000000, 0xffffff]), -1);
 
       dc.drawText(
         ((dc.getWidth() / 18) * COORDS[i].get(:text_x)) + 2,
         ((dc.getHeight() / 18) * COORDS[i].get(:text_y)) + 18,
-        Graphics.FONT_NUMBER_MILD,
+        5,
         fields[i].get(:formattedValue),
-        Graphics.TEXT_JUSTIFY_CENTER
+        1
       );
 
-      var valueDimension = dc.getTextDimensions(fields[i].get(:formattedValue), Graphics.FONT_NUMBER_MILD);
-      var unitDimension = dc.getTextDimensions(fields[i].get(:unit), Graphics.FONT_XTINY);
+      var valueDimension = dc.getTextDimensions(fields[i].get(:formattedValue), 5);
+      var unitDimension = dc.getTextDimensions(fields[i].get(:unit), 0);
 
       dc.drawText(
         ((dc.getWidth() / 18) * COORDS[i].get(:text_x)) + (valueDimension[0] / 2) + (dc.getWidth() / 100) + 2,
         ((dc.getHeight() / 18) * COORDS[i].get(:text_y)) + valueDimension[1] - unitDimension[1] + 13,
-        Graphics.FONT_XTINY,
+        0,
         fields[i].get(:unit),
-        Graphics.TEXT_JUSTIFY_LEFT
+        2
       );
 
-      dc.setColor(Colors.get(fields[i].get(:colors)), Graphics.COLOR_TRANSPARENT);
+      dc.setColor(Colors.get(fields[i].get(:colors)), -1);
 
 
       dc.drawText(
         ((dc.getWidth() / 18) * COORDS[i].get(:text_x)) + 2,
         ((dc.getHeight() / 18) * COORDS[i].get(:text_y)) - 6,
-        Graphics.FONT_SMALL,
+        2,
         fields[i].get(:label),
-        Graphics.TEXT_JUSTIFY_CENTER
+        1
       );
 
       dc.setPenWidth(3);
