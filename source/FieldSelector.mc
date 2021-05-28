@@ -1,24 +1,24 @@
 class FieldSelector {
   // Color, Label, Unit, Format
   const FIELD_DATA = {
-    :power => [[ 0xAA00FF ], "Power", "W", "%d" ],
-    :averagePower => [[ 0xAA00FF ], "Avg Power", "W", "%d" ],
-    :maxPower => [[ 0xAA00FF ], "Max Power", "W", "%d" ],
-    :heartRate => [[ 0xFF0000 ], "Heart Rate", "bpm", "%d" ],
-    :averageHeartRate => [[ 0xFF0000 ], "Avg HR", "bpm", "%d" ],
-    :speed => [[ 0x00AAFF ], "Speed", "km/h", "%d" ],
-    :averageSpeed => [[ 0x00AAFF ], "Avg Speed", "km/h", "%.1f" ],
-    :cadence => [[ 0x00AA00, 0x00FF00 ], "Cadence", "rpm", "%d" ],
-    :averageCadence => [[ 0x00AA00, 0x00FF00 ], "Avg Cadence", "rpm", "%d" ],
-    :distance => [[ 0x000000, 0xffffff ], "Distance", "km", "%.1f" ],
-    :heading => [[ 0x000000, 0xffffff ], "Heading", "", null ],
-    :altitude => [[ 0x000000, 0xffffff ], "Altitude", "m", "%d" ],
-    :totalAscent => [[ 0x000000, 0xffffff ], "Total Ascent", "m", "%d" ],
+    :power => [[0xAA00FF ], "Power", "W", "%d"],
+    :averagePower => [[0xAA00FF ], "Avg Power", "W", "%d"],
+    :maxPower => [[0xAA00FF ], "Max Power", "W", "%d"],
+    :heartRate => [[0xFF0000 ], "Heart Rate", "bpm", "%d"],
+    :averageHeartRate => [[0xFF0000 ], "Avg HR", "bpm", "%d"],
+    :speed => [[0x00AAFF ], "Speed", "km/h", "%d"],
+    :averageSpeed => [[0x00AAFF ], "Avg Speed", "km/h", "%.1f"],
+    :cadence => [[0x00AA00, 0x00FF00 ], "Cadence", "rpm", "%d"],
+    :averageCadence => [[0x00AA00, 0x00FF00 ], "Avg Cadence", "rpm", "%d"],
+    :distance => [[0x000000, 0xffffff ], "Distance", "km", "%.1f"],
+    :heading => [[0x000000, 0xffffff ], "Heading", "", null],
+    :altitude => [[0x000000, 0xffffff ], "Altitude", "m", "%d"],
+    :totalAscent => [[0x000000, 0xffffff ], "Total Ascent", "m", "%d"]
   };
 
   const FIELDS_FOR_MODE = {
-    :stopped => [ :distance, :averageHeartRate, :averagePower, :averageSpeed, :averageCadence, :maxPower, :totalAscent ],
-    :flat => [ :power, :heartRate, :speed, :distance, :cadence, :heading, :altitude, :totalAscent  ],
+    :stopped => [:distance, :averageHeartRate, :averagePower, :averageSpeed, :averageCadence, :maxPower, :totalAscent],
+    :flat => [:power, :heartRate, :speed, :distance, :cadence, :heading, :altitude, :totalAscent],
   };
 
   function mainField() {

@@ -1,35 +1,6 @@
+// TODO: ftp and max_hr should be set by the user!
+
 class ArcField {
-  // FIXME: These should eventually be set by the user!
-  const FTP = 306;
-  const MAX_HR = 191;
-  const MAX_SPEED = 60;
-
-  const POWER_ZONES = [
-    { :power => 0.0, :powerMax => 0.548, :colors => [ 0x777777, 0x999999 ] }, // Active Recovery
-    { :power => 0.55, :powerMax => 0.758, :colors => [ 0x8EC6FF ] }, // Endurance
-    { :power => 0.76, :powerMax => 0.908, :colors => [ 0x00A746 ] }, // Tempo
-    { :power => 0.91, :powerMax => 1.058, :colors => [ 0xc2c219 ] }, // Threshold
-    { :power => 1.06, :powerMax => 1.208, :colors => [ 0xFF6111 ] }, // VO2 Max
-    { :power => 1.21, :powerMax => 1.508, :colors => [ 0xFF0F17 ] }, // Anaerobic
-    { :power => 1.51, :powerMax => 5, :colors => [ 0xBC0722 ] } // Neuromuscular
-  ];
-
-  const HEART_RATE_ZONES = [
-    { :heartRate => 0.50, :heartRateMax => 0.598, :colors => [ 0x777777, 0x999999 ] }, // Active Recovery
-    { :heartRate => 0.60, :heartRateMax => 0.698, :colors => [ 0x8EC6FF ] }, // Endurance
-    { :heartRate => 0.70, :heartRateMax => 0.798, :colors => [ 0x00A746 ] }, // Tempo
-    { :heartRate => 0.80, :heartRateMax => 0.898, :colors => [ 0xc2c219 ] }, // Threshold
-    { :heartRate => 0.90, :heartRateMax => 1.00, :colors => [ 0xFF6111 ] }, // VO2 Max
-  ];
-
-  const SPEED_ZONES = [
-    { :speed => 0.0, :speedMax => 10.0, :colors => [ 0x0084ff ] },
-    { :speed => 10.0, :speedMax => 20.0, :colors => [ 0x297dcc, 0x339cff ] },
-    { :speed => 20.0, :speedMax => 30.0, :colors => [ 0x3d6d99, 0x66b5ff ] },
-    { :speed => 30.0, :speedMax => 40.0, :colors => [ 0x3d5266, 0x99ceff ] },
-    { :speed => 40.0, :speedMax => 50.0, :colors => [ 0x292e33, 0xcce6ff ] },
-    { :speed => 50.0, :speedMax => 60.0, :colors => [ 0x000000, 0xffffff ] },
-  ];
 
   function draw(dc, field) {
     dc.setColor(Colors.get([0x000000, 0xffffff]), -1);
@@ -44,54 +15,84 @@ class ArcField {
   }
 
   hidden function drawPower(dc, field) {
+    var ftp = 306;
+    var zones = [
+      [ 0.0, 0.548, [ 0x777777, 0x999999 ] ], // Active Recovery
+      [ 0.55, 0.758, [ 0x8EC6FF ] ], // Endurance
+      [ 0.76, 0.908, [ 0x00A746 ] ], // Tempo
+      [ 0.91, 1.058, [ 0xc2c219 ] ], // Threshold
+      [ 1.06, 1.208, [ 0xFF6111 ] ], // VO2 Max
+      [ 1.21, 1.508, [ 0xFF0F17 ] ], // Anaerobic
+      [ 1.51, 5, [ 0xBC0722 ] ] // Neuromuscular
+    ];
+
     var power = field.get(:value);
 
-    for(var i = 0; i < POWER_ZONES.size(); i++) {
-      var zone = POWER_ZONES[i];
+    for(var i = 0; i < zones.size(); i++) {
+      var zone = zones[i];
 
       drawRawBand(
         dc,
         0,
         power,
-        FTP * 1.5,
-        zone.get(:power) * FTP,
-        zone.get(:powerMax) * FTP,
-        zone.get(:colors)
+        ftp * 1.5,
+        zone[0] * ftp,
+        zone[1] * ftp,
+        zone[2]
       );
     }
   }
 
   hidden function drawHeartRate(dc, field) {
-    var minimumHeartRateShown = (HEART_RATE_ZONES[0].get(:heartRate) * MAX_HR).toFloat();
+    var maxHR = 191;
+    var zones = [
+      [ 0.50, 0.598, [ 0x777777, 0x999999 ] ], // Active Recovery
+      [ 0.60, 0.698, [ 0x8EC6FF ] ], // Endurance
+      [ 0.70, 0.798, [ 0x00A746 ] ], // Tempo
+      [ 0.80, 0.898, [ 0xc2c219 ] ], // Threshold
+      [ 0.90, 1.00, [ 0xFF6111 ] ], // VO2 Max
+    ];
+
+    var minimumHeartRateShown = (zones[0][0] * maxHR).toFloat();
     var heartRate = field.get(:value);
 
-    for(var i = 0; i < HEART_RATE_ZONES.size(); i++) {
-      var zone = HEART_RATE_ZONES[i];
+    for(var i = 0; i < zones.size(); i++) {
+      var zone = zones[i];
 
       drawRawBand(
         dc,
         minimumHeartRateShown,
         heartRate,
-        MAX_HR,
-        zone.get(:heartRate) * MAX_HR,
-        zone.get(:heartRateMax) * MAX_HR,
-        zone.get(:colors)
+        maxHR,
+        zone[0] * maxHR,
+        zone[1] * maxHR,
+        zone[2]
       );
     }
   }
 
   hidden function drawSpeed(dc, field) {
+    var maxSpeed = 60;
+    var zones = [
+      [0.0, 10.0, [ 0x0084ff ] ],
+      [10.0, 20.0, [ 0x297dcc, 0x339cff ] ],
+      [20.0, 30.0, [ 0x3d6d99, 0x66b5ff ] ],
+      [30.0, 40.0, [ 0x3d5266, 0x99ceff ] ],
+      [40.0, 50.0, [ 0x292e33, 0xcce6ff ] ],
+      [50.0, 60.0, [ 0x000000, 0xffffff ] ],
+    ];
+
     var speed = field.get(:value);
 
-    for(var i = 0; i < SPEED_ZONES.size(); i++) {
+    for(var i = 0; i < zones.size(); i++) {
       drawRawBand(
         dc,
         0,
         speed,
-        MAX_SPEED,
-        SPEED_ZONES[i].get(:speed),
-        SPEED_ZONES[i].get(:speedMax),
-        SPEED_ZONES[i].get(:colors)
+        maxSpeed,
+        zones[i][0],
+        zones[i][1],
+        zones[i][2]
       );
     }
   }

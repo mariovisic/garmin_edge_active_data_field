@@ -3,7 +3,6 @@ using Toybox.Math;
 module Calculator {
   var mode = :flat;
 
-  // FIXME: Move these to a shared external class
   var historicalValues = {
     :heartRate => new [5],
     :averageHeartRate => new [1],
@@ -96,8 +95,6 @@ module Calculator {
     }
   }
 
-  // FIXME: This should keep track of which values have ever had a value set
-  // which is not NULL, rather than checking if the current value is NULL;
   function hasField(name) {
     return(getRawValue(name) != null);
   }
