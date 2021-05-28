@@ -1,19 +1,19 @@
 class FieldSelector {
-  // FIXME: Move these to a shared external class
+  // Color, Label, Unit, Format
   const FIELD_DATA = {
-    :power => { :colors => [ 0xAA00FF ], :label => "Power", :unit => "W", :format => "%d" },
-    :averagePower => { :colors => [ 0xAA00FF ], :label => "Avg Power", :unit => "W", :format => "%d" },
-    :maxPower => { :colors => [ 0xAA00FF ], :label => "Max Power", :unit => "W", :format => "%d" },
-    :heartRate => { :colors => [ 0xFF0000 ], :label => "Heart Rate", :unit => "bpm", :format => "%d" },
-    :averageHeartRate => { :colors => [ 0xFF0000 ], :label => "Avg HR", :unit => "bpm", :format => "%d" },
-    :speed => { :colors => [ 0x00AAFF ], :label => "Speed", :unit => "km/h", :format => "%d" },
-    :averageSpeed => { :colors => [ 0x00AAFF ], :label => "Avg Speed", :unit => "km/h", :format => "%.1f" },
-    :cadence => { :colors => [ 0x00AA00, 0x00FF00 ], :label => "Cadence", :unit => "rpm", :format => "%d" },
-    :averageCadence => { :colors => [ 0x00AA00, 0x00FF00 ], :label => "Avg Cadence", :unit => "rpm", :format => "%d" },
-    :distance => { :colors => [ 0x000000, 0xffffff ], :label => "Distance", :unit => "km", :format => "%.1f" },
-    :heading => { :colors => [ 0x000000, 0xffffff ], :label => "Heading", :unit => "", :format => null },
-    :altitude => { :colors => [ 0x000000, 0xffffff ], :label => "Altitude", :unit => "m", :format => "%d" },
-    :totalAscent => { :colors => [ 0x000000, 0xffffff ], :label => "Total Ascent", :unit => "m", :format => "%d" },
+    :power => [[ 0xAA00FF ], "Power", "W", "%d" ],
+    :averagePower => [[ 0xAA00FF ], "Avg Power", "W", "%d" ],
+    :maxPower => [[ 0xAA00FF ], "Max Power", "W", "%d" ],
+    :heartRate => [[ 0xFF0000 ], "Heart Rate", "bpm", "%d" ],
+    :averageHeartRate => [[ 0xFF0000 ], "Avg HR", "bpm", "%d" ],
+    :speed => [[ 0x00AAFF ], "Speed", "km/h", "%d" ],
+    :averageSpeed => [[ 0x00AAFF ], "Avg Speed", "km/h", "%.1f" ],
+    :cadence => [[ 0x00AA00, 0x00FF00 ], "Cadence", "rpm", "%d" ],
+    :averageCadence => [[ 0x00AA00, 0x00FF00 ], "Avg Cadence", "rpm", "%d" ],
+    :distance => [[ 0x000000, 0xffffff ], "Distance", "km", "%.1f" ],
+    :heading => [[ 0x000000, 0xffffff ], "Heading", "", null ],
+    :altitude => [[ 0x000000, 0xffffff ], "Altitude", "m", "%d" ],
+    :totalAscent => [[ 0x000000, 0xffffff ], "Total Ascent", "m", "%d" ],
   };
 
   const FIELDS_FOR_MODE = {
@@ -54,11 +54,11 @@ class FieldSelector {
   hidden function mapField(field) {
     return({
       :name => field,
-      :colors => FIELD_DATA.get(field).get(:colors),
-      :label => FIELD_DATA.get(field).get(:label),
-      :unit => FIELD_DATA.get(field).get(:unit),
       :value => Calculator.getLatestValue(field),
-      :formattedValue => Calculator.getLatestFormattedValue(field, FIELD_DATA.get(field).get(:format))
+      :colors => FIELD_DATA.get(field)[0],
+      :label => FIELD_DATA.get(field)[1],
+      :unit => FIELD_DATA.get(field)[2],
+      :formattedValue => Calculator.getLatestFormattedValue(field, FIELD_DATA.get(field)[3])
     });
   }
 }
