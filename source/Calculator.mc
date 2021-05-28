@@ -105,24 +105,28 @@ module Calculator {
   function radiansToHeading(radians) {
     if(radians == null) {
       return "---";
-    } else if(Math.toDegrees(radians) < -157.5) {
-      return "S";
-    } else if(Math.toDegrees(radians) < -112.5) {
-      return "SW";
-    } else if(Math.toDegrees(radians) < -67.5) {
-      return "W";
-    } else if(Math.toDegrees(radians) < -22.5) {
-      return "NW";
-    } else if(Math.toDegrees(radians) < 22.5) {
-      return "N";
-    } else if(Math.toDegrees(radians) < 67.5) {
-      return "NE";
-    } else if(Math.toDegrees(radians) < 112.5) {
-      return "E";
-    } else if(Math.toDegrees(radians) < 157.5) {
-      return "SE";
-    } else {
-      return "S";
+    }
+    else {
+      var degrees = Math.toDegrees(radians);
+      if(degrees < -157.5) {
+        return "S";
+      } else if(degrees < -112.5) {
+        return "SW";
+      } else if(degrees < -67.5) {
+        return "W";
+      } else if(degrees < -22.5) {
+        return "NW";
+      } else if(degrees < 22.5) {
+        return "N";
+      } else if(degrees < 67.5) {
+        return "NE";
+      } else if(degrees < 112.5) {
+        return "E";
+      } else if(degrees < 157.5) {
+        return "SE";
+      } else {
+        return "S";
+      }
     }
   }
 }
