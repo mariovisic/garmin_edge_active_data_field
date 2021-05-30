@@ -11,7 +11,7 @@ class SecondaryFields {
 
       dc.drawText(
         L.w(coords[i][0]),
-        L.h(coords[i][1] + 1.5) + labelDimension[1],
+        L.h(coords[i][1] + 1.75) + labelDimension[1],
         6,
         fields[i].get(:formattedValue),
         1
@@ -40,9 +40,9 @@ class SecondaryFields {
 
       dc.drawLine(
         L.w(coords[i][0] - 17.5),
-        L.h(coords[i][1] + 0.75) + labelDimension[1],
+        L.h(coords[i][1] + 1) + labelDimension[1],
         L.w(coords[i][0] + 17.5),
-        L.h(coords[i][1] + 0.75) + labelDimension[1]
+        L.h(coords[i][1] + 1) + labelDimension[1]
       );
     }
   }
