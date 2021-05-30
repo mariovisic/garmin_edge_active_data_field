@@ -2,8 +2,6 @@ class SecondaryFields {
   function draw(dc, fields) {
     var coords = [[25, 15], [75, 15], [25, 76.5], [75, 76.5]];
 
-    dc.setPenWidth(2);
-
     for( var i = 0; i < fields.size(); i++) {
       var valueDimension = dc.getTextDimensions(fields[i].get(:formattedValue), 6);
       var unitDimension = dc.getTextDimensions(fields[i].get(:unit), 0);
