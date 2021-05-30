@@ -8,9 +8,9 @@ module ElapsedTimeField {
     var seconds = (elapsedTime - (hours * 3600) - (minutes * 60));
 
     dc.drawText(
-      (dc.getWidth() / 24) * 23,
-      (dc.getWidth() / 24),
-      1,
+      L.w(92),
+      L.w(4),
+      2,
       hours.format("%2d") + ":" + minutes.format("%02d") + ":" + seconds.format("%02d"),
       0
     );

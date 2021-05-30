@@ -1,31 +1,27 @@
 class SecondaryFields {
   function draw(dc, fields) {
-    var coords = [
-      [4.5, 2.875, 2, 4],
-      [13.5, 2.875, 11, 4],
-      [4.5, 15.125, 2, 16.25],
-      [13.5, 15.125, 11, 16.25],
-    ];
+    var coords = [[25, 15], [75, 15], [25, 76.5], [75, 76.5]];
 
     dc.setPenWidth(2);
 
     for( var i = 0; i < fields.size(); i++) {
+      var valueDimension = dc.getTextDimensions(fields[i].get(:formattedValue), 6);
+      var unitDimension = dc.getTextDimensions(fields[i].get(:unit), 0);
+      var labelDimension = dc.getTextDimensions(fields[i].get(:label), 3);
+
       dc.setColor(Colors.get([0x000000, 0xffffff]), -1);
 
       dc.drawText(
-        ((dc.getWidth() / 18) * coords[i][0]) + 2,
-        ((dc.getHeight() / 18) * coords[i][1]) + 18,
-        5,
+        L.w(coords[i][0]),
+        L.h(coords[i][1] + 1.5) + labelDimension[1],
+        6,
         fields[i].get(:formattedValue),
         1
       );
 
-      var valueDimension = dc.getTextDimensions(fields[i].get(:formattedValue), 5);
-      var unitDimension = dc.getTextDimensions(fields[i].get(:unit), 0);
-
       dc.drawText(
-        ((dc.getWidth() / 18) * coords[i][0]) + (valueDimension[0] / 2) + (dc.getWidth() / 100) + 2,
-        ((dc.getHeight() / 18) * coords[i][1]) + valueDimension[1] - unitDimension[1] + 13,
+        L.w(coords[i][0] + 1) + (valueDimension[0] / 2.0),
+        L.h(coords[i][1] - 1.25) + labelDimension[1] + valueDimension[1] - unitDimension[1],
         0,
         fields[i].get(:unit),
         2
@@ -35,20 +31,20 @@ class SecondaryFields {
 
 
       dc.drawText(
-        ((dc.getWidth() / 18) * coords[i][0]) + 2,
-        ((dc.getHeight() / 18) * coords[i][1]) - 6,
-        2,
+        L.w(coords[i][0]),
+        L.h(coords[i][1]),
+        3,
         fields[i].get(:label),
         1
       );
 
-      dc.setPenWidth(3);
+      dc.setPenWidth(L.h(1.25));
 
       dc.drawLine(
-        ((dc.getWidth() / 18) * coords[i][2]) - 4,
-        (dc.getHeight() / 18) * coords[i][3],
-        ((dc.getWidth() / 18) * coords[i][2]) - 4 + ((dc.getWidth() / 18) * 6),
-        (dc.getHeight() / 18) * coords[i][3]
+        L.w(coords[i][0] - 17.5),
+        L.h(coords[i][1] + 0.75) + labelDimension[1],
+        L.w(coords[i][0] + 17.5),
+        L.h(coords[i][1] + 0.75) + labelDimension[1]
       );
     }
   }
