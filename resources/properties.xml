@@ -1,0 +1,21 @@
+<resources>
+    <properties>
+        <property id="ftp" type="number">200</property>
+        <property id="max_hr" type="number">180</property>
+    </properties>
+
+    <strings>
+       <string id="ftp_title">FTP</string>
+       <string id="max_hr_title">Max heart rate</string>
+    </strings>
+
+    <settings>
+        <setting propertyKey="@Properties.ftp" title="@Strings.ftp_title">
+            <settingConfig type="numeric" />
+        </setting>
+
+        <setting propertyKey="@Properties.max_hr" title="@Strings.max_hr_title">
+            <settingConfig type="numeric" />
+        </setting>
+    </settings>
+</resources>

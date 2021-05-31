@@ -15,7 +15,8 @@ class ArcField {
   }
 
   hidden function drawPower(dc, field) {
-    var ftp = 306;
+    var ftp = Toybox.Application.getApp().getProperty("ftp");
+
     var zones = [
       [ 0.0, 0.548, [ 0x777777, 0x999999 ] ], // Active Recovery
       [ 0.55, 0.758, [ 0x8EC6FF ] ], // Endurance
@@ -44,7 +45,7 @@ class ArcField {
   }
 
   hidden function drawHeartRate(dc, field) {
-    var maxHR = 191;
+    var maxHR = Toybox.Application.getApp().getProperty("max_hr");
     var zones = [
       [ 0.50, 0.598, [ 0x777777, 0x999999 ] ], // Active Recovery
       [ 0.60, 0.698, [ 0x8EC6FF ] ], // Endurance
