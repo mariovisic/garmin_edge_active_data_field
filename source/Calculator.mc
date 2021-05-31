@@ -17,6 +17,7 @@ module Calculator {
     :heading => new [1],
     :altitude => new [5],
     :totalAscent => new [5],
+    :elevationGrade => new [1]
   };
 
   function logInfo(info) {
@@ -33,6 +34,10 @@ module Calculator {
     logValue(:heading, radiansToHeading(info.currentHeading), 1, null);
     logValue(:altitude, info.altitude, 5, null);
     logValue(:totalAscent, info.totalAscent, 5, null);
+    
+    if(mode != :stopped) {
+      logValue(:elevationGrade, elevationGrade(), 1, null);
+    }
   }
 
   function updateMode() {
@@ -125,5 +130,17 @@ module Calculator {
         return "S";
       }
     }
+  }
+
+  function elevationGrade() {
+    if(historicalValues.get(:distance)[0] != null
+      && historicalValues.get(:distance)[4] != null
+      && historicalValues.get(:altitude)[0] != null
+      && historicalValues.get(:altitude)[4] != null
+    ) {
+        var distance = (historicalValues.get(:distance)[4] - historicalValues.get(:distance)[0]) * 1000;
+        var elevationChange = historicalValues.get(:altitude)[4] - historicalValues.get(:altitude)[0];
+        return (elevationChange / distance.toFloat() * 100);
+      }
   }
 }
