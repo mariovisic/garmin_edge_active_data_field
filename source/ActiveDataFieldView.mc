@@ -19,8 +19,6 @@ class ActiveDataFieldView extends Ui.DataField
   }
 
   function onUpdate(dc) {
-    L.width = dc.getWidth();
-    L.height = dc.getHeight();
     Colors.backgroundColor = getBackgroundColor();
     var fieldsSelector = new FieldSelector();
 

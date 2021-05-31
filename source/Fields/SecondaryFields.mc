@@ -1,6 +1,6 @@
 class SecondaryFields {
   function draw(dc, fields) {
-    var coords = [[25, 15], [75, 15], [25, 76.5], [75, 76.5]];
+    var coords = [[0.25, 0.15], [0.75, 0.15], [0.25, 0.765], [0.75, 0.765]];
 
     for( var i = 0; i < fields.size(); i++) {
       var valueDimension = dc.getTextDimensions(fields[i].get(:formattedValue), 6);
@@ -10,16 +10,16 @@ class SecondaryFields {
       dc.setColor(Colors.get([0x000000, 0xffffff]), -1);
 
       dc.drawText(
-        L.w(coords[i][0]),
-        L.h(coords[i][1] + 1.75) + labelDimension[1],
+        dc.getWidth() * coords[i][0],
+        dc.getHeight() * (coords[i][1] + 0.0175) + labelDimension[1],
         6,
         fields[i].get(:formattedValue),
         1
       );
 
       dc.drawText(
-        L.w(coords[i][0] + 1) + (valueDimension[0] / 2.0),
-        L.h(coords[i][1] - 1.25) + labelDimension[1] + valueDimension[1] - unitDimension[1],
+        dc.getWidth() * (coords[i][0] + 0.01) + (valueDimension[0] / 2.0),
+        dc.getHeight() * (coords[i][1] - 0.0125) + labelDimension[1] + valueDimension[1] - unitDimension[1],
         0,
         fields[i].get(:unit),
         2
@@ -29,20 +29,20 @@ class SecondaryFields {
 
 
       dc.drawText(
-        L.w(coords[i][0]),
-        L.h(coords[i][1]),
+        dc.getWidth() * coords[i][0],
+        dc.getHeight() * coords[i][1],
         3,
         fields[i].get(:label),
         1
       );
 
-      dc.setPenWidth(L.h(1.25));
+      dc.setPenWidth(dc.getHeight() * 0.0125);
 
       dc.drawLine(
-        L.w(coords[i][0] - 17.5),
-        L.h(coords[i][1] + 1) + labelDimension[1],
-        L.w(coords[i][0] + 17.5),
-        L.h(coords[i][1] + 1) + labelDimension[1]
+        dc.getWidth() * (coords[i][0] - 0.175),
+        (dc.getHeight() * (coords[i][1] + 0.01)) + labelDimension[1],
+        dc.getWidth() * (coords[i][0] + 0.175),
+        (dc.getHeight() * (coords[i][1] + 0.01)) + labelDimension[1]
       );
     }
   }
