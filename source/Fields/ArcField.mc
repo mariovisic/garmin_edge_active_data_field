@@ -105,11 +105,11 @@ class ArcField {
       }
 
       var arcRadius = null;
-      var ArcStartAngle = 175 + ((zoneStart - startValueOffset) / (maximumValue - startValueOffset) * 190);
-      var ArcFinishAngle = 175 + ((zoneFinish - startValueOffset) / (maximumValue - startValueOffset) * 190);
+      var ArcStartAngle = 235 + ((zoneStart - startValueOffset) / (maximumValue - startValueOffset) * 50);
+      var ArcFinishAngle = 235 + ((zoneFinish - startValueOffset) / (maximumValue - startValueOffset) * 50);
 
       if(ArcFinishAngle > ArcStartAngle + 1) {
-        dc.setPenWidth(dc.getWidth() * 0.09);
+        dc.setPenWidth(dc.getWidth() * 0.08);
         dc.setColor(Colors.get(colors), -1);
 
         dc.setClip(
@@ -121,8 +121,8 @@ class ArcField {
 
         dc.drawArc(
           dc.getWidth() * 0.5,
-          dc.getHeight() * 0.17,
-          dc.getWidth() * 0.35,
+          -dc.getHeight() * 0.13,
+          dc.getWidth() * 0.70,
           0,
           ArcStartAngle,
           ArcFinishAngle
