@@ -6,8 +6,8 @@ module CurrentTimeAndBatteryField {
     var hour = clockTime.hour % 12 == 0 ? 12 : clockTime.hour % 12;
 
     dc.drawText(
-      (dc.getWidth() * 0.04),
-      (dc.getWidth() * 0.04),
+      (dc.getWidth() * 0.02),
+      0,
       2,
       hour.format("%2d") + ":" + clockTime.min.format("%02d") + amOrPm + " / " + batteryPercentage.format("%2d") + "%",
       2

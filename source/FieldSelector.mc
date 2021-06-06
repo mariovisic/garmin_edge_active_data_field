@@ -40,7 +40,7 @@ class FieldSelector {
       }
     }
 
-    return mapFields(secondaryFields.slice(1, 5));
+    return mapFields(secondaryFields.slice(1, 7));
   }
 
   hidden function mapFields(fields) {

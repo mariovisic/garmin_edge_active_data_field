@@ -112,14 +112,23 @@ class ArcField {
         dc.setPenWidth(dc.getWidth() * 0.09);
         dc.setColor(Colors.get(colors), -1);
 
+        dc.setClip(
+          0,
+          dc.getHeight() * 0.075,
+          dc.getWidth(),
+          dc.getHeight() * 0.37
+        );
+
         dc.drawArc(
           dc.getWidth() * 0.5,
-          dc.getHeight() * 0.48,
+          dc.getHeight() * 0.17,
           dc.getWidth() * 0.35,
           0,
           ArcStartAngle,
           ArcFinishAngle
         );
+
+        dc.clearClip();
       }
     }
   }
