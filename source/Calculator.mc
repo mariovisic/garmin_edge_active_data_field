@@ -4,69 +4,79 @@ module Calculator {
   var mode = :flat;
 
   var historicalValues = {
-    :heartRate => new [5],
+    :heartRate => new [1],
     :averageHeartRate => new [1],
-    :power => new [5],
+    :power => new [3],
     :power3s => new [1],
     :averagePower => new [1],
     :maxPower => new [1],
-    :cadence => new [5],
+    :cadence => new [1],
     :averageCadence => new [1],
     :distance => new [5],
-    :speed => new [5],
+    :speed => new [3],
     :averageSpeed => new [1],
     :heading => new [1],
     :altitude => new [5],
-    :totalAscent => new [5],
-    :elevationGrade => new [1]
+    :totalAscent => new [1],
+    :elevationGrade => new [3]
   };
 
   function logInfo(info) {
-    logValue(:heartRate, info.currentHeartRate, 5, null);
+    logValue(:heartRate, info.currentHeartRate, 1, null);
     logValue(:averageHeartRate, info.averageHeartRate, 1, null);
-    logValue(:power, info.currentPower, 5, null);
+    logValue(:power, info.currentPower, 3, null);
     logValue(:power3s, threeSecondPower(), 1, null);
     logValue(:averagePower, info.averagePower, 1, null);
     logValue(:maxPower, info.maxPower, 1, null);
-    logValue(:cadence, info.currentCadence, 5, null);
+    logValue(:cadence, info.currentCadence, 1, null);
     logValue(:averageCadence, info.averageCadence, 1, null);
     logValue(:distance, info.elapsedDistance, 5, 0.001);
-    logValue(:speed, info.currentSpeed, 5, 3.6);
+    logValue(:speed, info.currentSpeed, 3, 3.6);
     logValue(:averageSpeed, info.averageSpeed, 1, 3.6);
     logValue(:heading, radiansToHeading(info.currentHeading), 1, null);
     logValue(:altitude, info.altitude, 5, null);
-    logValue(:totalAscent, info.totalAscent, 5, null);
+    logValue(:totalAscent, info.totalAscent, 1, null);
     
     if(mode != :stopped) {
-      logValue(:elevationGrade, elevationGrade(), 1, null);
+      logValue(:elevationGrade, elevationGrade(), 3, null);
     }
   }
 
   function updateMode() {
-    if(mode == :flat) {
-      var lastThreeSpeeds = historicalValues.get(:speed).slice(-3, null);
-      var stopped = true;
-      for(var i = 0; i < lastThreeSpeeds.size(); i++) {
-        if(lastThreeSpeeds[i] != 0) {
-          stopped = false;
-          break;
-        }
-      }
-      if(stopped) {
-        mode = :stopped;
-      }
-    } else if(mode == :stopped) {
-      var lastThreeSpeeds = historicalValues.get(:speed).slice(-3, null);
-      var stopped = true;
-      for(var i = 0; i < lastThreeSpeeds.size(); i++) {
-        if(lastThreeSpeeds[i] != 0) {
-          stopped = false;
-          break;
-        }
-      }
-      if(!stopped) {
-        mode = :flat;
-      }
+    var lastThreeSpeeds = historicalValues.get(:speed).slice(-3, null);
+    var lastThreeGradients = historicalValues.get(:elevationGrade).slice(-3, null);
+
+    if(lastThreeSpeeds[0] == null) { lastThreeSpeeds[0] = 0; }
+    if(lastThreeSpeeds[1] == null) { lastThreeSpeeds[1] = 0; }
+    if(lastThreeSpeeds[2] == null) { lastThreeSpeeds[2] = 0; }
+
+    if(lastThreeGradients[0] == null) { lastThreeGradients[0] = 0; }
+    if(lastThreeGradients[1] == null) { lastThreeGradients[1] = 0; }
+    if(lastThreeGradients[2] == null) { lastThreeGradients[2] = 0; }
+
+    if(lastThreeSpeeds[0] == 0
+      && lastThreeSpeeds[1] == 0
+      && lastThreeSpeeds[2] == 0
+    ) {
+      mode = :stopped;
+    } else if(
+      lastThreeGradients[0] >= 3
+      && lastThreeGradients[1] >= 3
+      && lastThreeGradients[2] >= 3
+      // Only show climbing mode when slower than 20km/h
+      && lastThreeSpeeds[0] < 20
+    ) {
+      mode = :climbing;
+    } else if(
+      lastThreeGradients[0] <= -3
+      && lastThreeGradients[1] <= -3
+      && lastThreeGradients[2] <= -3
+      // Only show descending mode when at 25km/h
+      && lastThreeSpeeds[0] >= 25
+    ) {
+      mode = :descending;
+    } else {
+      mode = :flat;
     }
   }
 
@@ -141,18 +151,22 @@ module Calculator {
       && historicalValues.get(:altitude)[4] != null
     ) {
       var distance = (historicalValues.get(:distance)[4] - historicalValues.get(:distance)[0]) * 1000;
-      var elevationChange = historicalValues.get(:altitude)[4] - historicalValues.get(:altitude)[0];
-      return (elevationChange / distance.toFloat() * 100);
+      // 7 metres travelled in 5 seconds is around 5km/h, so only calculate grade if we're faster than that :)
+      if(distance > 7) {
+        var elevationChange = historicalValues.get(:altitude)[4] - historicalValues.get(:altitude)[0];
+        return (elevationChange / distance.toFloat() * 100);
+      }
     }
     return null;
   }
 
   function threeSecondPower() {
-    if(historicalValues.get(:power)[4] != null
-      && historicalValues.get(:power)[3] != null
-      && historicalValues.get(:power)[2] != null
+    var powers = historicalValues.get(:power).slice(-3, null);
+    if(powers[2] != null
+      && powers[1] != null
+      && powers[0] != null
     ) {
-      return ((historicalValues.get(:power)[4] + historicalValues.get(:power)[3] + historicalValues.get(:power)[2]) / 3.0);
+      return ((powers[2] + powers[1] + powers[0]) / 3.0);
     }
     return null;
   }

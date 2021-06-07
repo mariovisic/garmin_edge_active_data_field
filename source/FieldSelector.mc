@@ -13,12 +13,15 @@ class FieldSelector {
     :distance => [[0x000000, 0xffffff ], "Distance", "km", "%.1f"],
     :heading => [[0x000000, 0xffffff ], "Heading", "", null],
     :altitude => [[0x000000, 0xffffff ], "Altitude", "m", "%d"],
-    :totalAscent => [[0x000000, 0xffffff ], "Total Ascent", "m", "%d"]
+    :totalAscent => [[0x000000, 0xffffff ], "Total Ascent", "m", "%d"],
+    :elevationGrade => [[0x000000, 0xffffff ], "Grade", "%", "%d"]
   };
 
   const FIELDS_FOR_MODE = {
+    :descending => [:speed, :distance],
+    :climbing => [:power3s, :heartRate, :speed, :distance, :cadence, :heading, :elevationGrade, :altitude, :totalAscent],
     :stopped => [:distance, :averageHeartRate, :averagePower, :averageSpeed, :averageCadence, :maxPower, :totalAscent],
-    :flat => [:power3s, :heartRate, :speed, :distance, :cadence, :heading, :altitude, :totalAscent],
+    :flat => [:power3s, :heartRate, :speed, :distance, :cadence, :heading, :elevationGrade, :altitude, :totalAscent],
   };
 
   function mainField() {
