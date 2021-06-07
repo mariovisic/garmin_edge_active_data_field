@@ -18,7 +18,7 @@ class SecondaryFields {
 
       dc.drawText(
         dc.getWidth() * coords[i][0],
-        dc.getHeight() * coords[i][1],
+        dc.getHeight() * (coords[i][1] + 0.005),
         3,
         fields[i].get(:label),
         1
