@@ -19,6 +19,8 @@ class MainField {
       2
     );
 
+    dc.setColor(Colors.get(field.get(:colors)), -1);
+
     dc.drawText(
       dc.getWidth() * 0.50,
       dc.getHeight() * 0.120,
