@@ -142,5 +142,6 @@ module Calculator {
         var elevationChange = historicalValues.get(:altitude)[4] - historicalValues.get(:altitude)[0];
         return (elevationChange / distance.toFloat() * 100);
       }
+    return null;
   }
 }
