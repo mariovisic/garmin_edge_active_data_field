@@ -9,7 +9,7 @@ module ElapsedTimeField {
 
     dc.drawText(
       dc.getWidth() * 0.94,
-      0,
+      (dc.getWidth() * 0.02),
       2,
       hours.format("%2d") + ":" + minutes.format("%02d") + ":" + seconds.format("%02d"),
       0

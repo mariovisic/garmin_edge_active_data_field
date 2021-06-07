@@ -1,12 +1,12 @@
 class SecondaryFields {
   function draw(dc, fields) {
     var coords = [
-      [0.25, 0.435],
-      [0.75, 0.435],
-      [0.25, 0.62],
-      [0.75, 0.62],
-      [0.25, 0.805],
-      [0.75, 0.805]]
+      [0.25, 0.405],
+      [0.75, 0.405],
+      [0.25, 0.60],
+      [0.75, 0.60],
+      [0.25, 0.795],
+      [0.75, 0.795]]
     ;
 
     for( var i = 0; i < fields.size(); i++) {
@@ -28,7 +28,7 @@ class SecondaryFields {
 
       dc.drawText(
         dc.getWidth() * coords[i][0],
-        dc.getHeight() * (coords[i][1] - 0.015) + labelDimension[1],
+        dc.getHeight() * (coords[i][1] - 0.005) + labelDimension[1],
         6,
         fields[i].get(:formattedValue),
         1
@@ -36,7 +36,7 @@ class SecondaryFields {
 
       dc.drawText(
         dc.getWidth() * (coords[i][0] + 0.01) + (valueDimension[0] / 2.0),
-        dc.getHeight() * (coords[i][1] - 0.045) + labelDimension[1] + valueDimension[1] - unitDimension[1],
+        dc.getHeight() * (coords[i][1] - 0.035) + labelDimension[1] + valueDimension[1] - unitDimension[1],
         0,
         fields[i].get(:unit),
         2

@@ -7,7 +7,7 @@ module CurrentTimeAndBatteryField {
 
     dc.drawText(
       (dc.getWidth() * 0.02),
-      0,
+      (dc.getWidth() * 0.02),
       2,
       hour.format("%2d") + ":" + clockTime.min.format("%02d") + amOrPm + " / " + batteryPercentage.format("%2d") + "%",
       2

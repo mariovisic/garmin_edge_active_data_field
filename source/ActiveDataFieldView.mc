@@ -29,7 +29,7 @@ class ActiveDataFieldView extends Ui.DataField
 
     var mainField = fieldsSelector.mainField();
 
-    new ArcField().draw(dc, mainField);
+    new MainFieldColor().draw(dc, mainField);
     new MainField().draw(dc, mainField);
   }
 }
