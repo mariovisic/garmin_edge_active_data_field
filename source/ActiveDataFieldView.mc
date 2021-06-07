@@ -22,7 +22,6 @@ class ActiveDataFieldView extends Ui.DataField
     Colors.backgroundColor = getBackgroundColor();
     var fieldsSelector = new FieldSelector();
 
-    Grid.draw(dc);
     ElapsedTimeField.draw(dc, elapsedTime);
     CurrentTimeAndBatteryField.draw(dc, clockTime, batteryPercentage);
     new SecondaryFields().draw(dc, fieldsSelector.secondaryFields());
@@ -31,5 +30,6 @@ class ActiveDataFieldView extends Ui.DataField
 
     new MainFieldColor().draw(dc, mainField);
     new MainField().draw(dc, mainField);
+    Grid.draw(dc);
   }
 }
