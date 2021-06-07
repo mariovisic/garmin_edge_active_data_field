@@ -1,6 +1,6 @@
 class MainFieldColor {
   function draw(dc, field) {
-    if(field.get(:name) == :power) {
+    if(field.get(:name) == :power3s) {
       drawPower(dc, field);
     } else if(field.get(:name) == :heartRate) {
       drawHeartRateColor(dc, field);

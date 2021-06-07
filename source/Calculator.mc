@@ -7,6 +7,7 @@ module Calculator {
     :heartRate => new [5],
     :averageHeartRate => new [1],
     :power => new [5],
+    :power3s => new [1],
     :averagePower => new [1],
     :maxPower => new [1],
     :cadence => new [5],
@@ -24,6 +25,7 @@ module Calculator {
     logValue(:heartRate, info.currentHeartRate, 5, null);
     logValue(:averageHeartRate, info.averageHeartRate, 1, null);
     logValue(:power, info.currentPower, 5, null);
+    logValue(:power3s, threeSecondPower(), 1, null);
     logValue(:averagePower, info.averagePower, 1, null);
     logValue(:maxPower, info.maxPower, 1, null);
     logValue(:cadence, info.currentCadence, 5, null);
@@ -138,10 +140,20 @@ module Calculator {
       && historicalValues.get(:altitude)[0] != null
       && historicalValues.get(:altitude)[4] != null
     ) {
-        var distance = (historicalValues.get(:distance)[4] - historicalValues.get(:distance)[0]) * 1000;
-        var elevationChange = historicalValues.get(:altitude)[4] - historicalValues.get(:altitude)[0];
-        return (elevationChange / distance.toFloat() * 100);
-      }
+      var distance = (historicalValues.get(:distance)[4] - historicalValues.get(:distance)[0]) * 1000;
+      var elevationChange = historicalValues.get(:altitude)[4] - historicalValues.get(:altitude)[0];
+      return (elevationChange / distance.toFloat() * 100);
+    }
+    return null;
+  }
+
+  function threeSecondPower() {
+    if(historicalValues.get(:power)[4] != null
+      && historicalValues.get(:power)[3] != null
+      && historicalValues.get(:power)[2] != null
+    ) {
+      return ((historicalValues.get(:power)[4] + historicalValues.get(:power)[3] + historicalValues.get(:power)[2]) / 3.0);
+    }
     return null;
   }
 }
