@@ -28,18 +28,18 @@ class SecondaryFields {
 
       dc.drawText(
         dc.getWidth() * coords[i][0],
-        dc.getHeight() * (coords[i][1] - 0.005) + labelDimension[1],
+        dc.getHeight() * (coords[i][1] + 0.12) - (labelDimension[1] / 2.0) + (valueDimension[1] / 2.0),
         6,
         fields[i].get(:formattedValue),
-        1
+        5
       );
 
       dc.drawText(
         dc.getWidth() * (coords[i][0] + 0.01) + (valueDimension[0] / 2.0),
-        dc.getHeight() * (coords[i][1] - 0.035) + labelDimension[1] + valueDimension[1] - unitDimension[1],
+        dc.getHeight() * (coords[i][1] + 0.07) - (labelDimension[1] / 2.0) + (valueDimension[1]),
         0,
         fields[i].get(:unit),
-        2
+        6
       );
 
     }
