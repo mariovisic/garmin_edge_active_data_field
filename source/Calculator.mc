@@ -6,8 +6,9 @@ module Calculator {
   var historicalValues = {
     :heartRate => new [1],
     :averageHeartRate => new [1],
-    :power => new [3],
+    :power => new [60],
     :power3s => new [1],
+    :power1m => new [1],
     :averagePower => new [1],
     :maxPower => new [1],
     :cadence => new [1],
@@ -24,8 +25,9 @@ module Calculator {
   function logInfo(info) {
     logValue(:heartRate, info.currentHeartRate, 1, null);
     logValue(:averageHeartRate, info.averageHeartRate, 1, null);
-    logValue(:power, info.currentPower, 3, null);
-    logValue(:power3s, threeSecondPower(), 1, null);
+    logValue(:power, info.currentPower, 60, null);
+    logValue(:power3s, powerAverage(3), 1, null);
+    logValue(:power1m, powerAverage(60), 1, null);
     logValue(:averagePower, info.averagePower, 1, null);
     logValue(:maxPower, info.maxPower, 1, null);
     logValue(:cadence, info.currentCadence, 1, null);
@@ -160,14 +162,17 @@ module Calculator {
     return null;
   }
 
-  function threeSecondPower() {
-    var powers = historicalValues.get(:power).slice(-3, null);
-    if(powers[2] != null
-      && powers[1] != null
-      && powers[0] != null
-    ) {
-      return ((powers[2] + powers[1] + powers[0]) / 3.0);
+  function powerAverage(num) {
+    var powers = historicalValues.get(:power).slice(-num, null);
+    var total = 0;
+    for(var i = 0; i < powers.size(); i++) {
+      if(powers[i] == null) {
+        return null;
+      } else {
+        total += powers[i];
+      }
     }
-    return null;
+
+    return total / num.toFloat();
   }
 }

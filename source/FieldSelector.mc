@@ -2,6 +2,7 @@ class FieldSelector {
   // Color, Label, Unit, Format
   const FIELD_DATA = {
     :power3s => [[0xAA00FF ], "Power (3s)", "W", "%d"],
+    :power1m => [[0xAA00FF ], "Power (1m)", "W", "%d"],
     :averagePower => [[0xAA00FF ], "Avg Power", "W", "%d"],
     :maxPower => [[0xAA00FF ], "Max Power", "W", "%d"],
     :heartRate => [[0xFF0000 ], "Heart Rate", "bpm", "%d"],
@@ -19,9 +20,9 @@ class FieldSelector {
 
   const FIELDS_FOR_MODE = {
     :descending => [:speed, :distance],
-    :climbing => [:power3s, :heartRate, :speed, :distance, :cadence, :heading, :elevationGrade, :altitude, :totalAscent],
+    :climbing => [:power3s, :power1m, :heartRate, :speed, :distance, :elevationGrade, :cadence, :heading, :altitude, :totalAscent],
     :stopped => [:distance, :averageHeartRate, :averagePower, :averageSpeed, :averageCadence, :maxPower, :totalAscent],
-    :flat => [:power3s, :heartRate, :speed, :distance, :cadence, :heading, :elevationGrade, :altitude, :totalAscent],
+    :flat => [:power3s, :power1m, :heartRate, :speed, :distance, :cadence, :heading, :elevationGrade, :altitude, :totalAscent],
   };
 
   function mainField() {
