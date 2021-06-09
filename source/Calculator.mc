@@ -9,7 +9,7 @@ module Calculator {
     :power => new [60],
     :power3s => new [1],
     :power1m => new [1],
-    :averagePower => new [1],
+    :normalizedAveragePower => new [1],
     :maxPower => new [1],
     :cadence => new [1],
     :averageCadence => new [1],
@@ -22,13 +22,17 @@ module Calculator {
     :elevationGrade => new [3]
   };
 
+  var count = 0;
+  var normalizedPowerTotal = 0;
+
   function logInfo(info) {
+
     logValue(:heartRate, info.currentHeartRate, 1, null);
     logValue(:averageHeartRate, info.averageHeartRate, 1, null);
     logValue(:power, info.currentPower, 60, null);
     logValue(:power3s, powerAverage(3), 1, null);
     logValue(:power1m, powerAverage(60), 1, null);
-    logValue(:averagePower, info.averagePower, 1, null);
+    logValue(:normalizedAveragePower, normalizedAveragePower(), 1, null);
     logValue(:maxPower, info.maxPower, 1, null);
     logValue(:cadence, info.currentCadence, 1, null);
     logValue(:averageCadence, info.averageCadence, 1, null);
@@ -42,6 +46,8 @@ module Calculator {
     if(mode != :stopped) {
       logValue(:elevationGrade, elevationGrade(), 3, null);
     }
+
+    count += 1;
   }
 
   function updateMode() {
@@ -174,5 +180,20 @@ module Calculator {
     }
 
     return total / num.toFloat();
+  }
+
+  function normalizedAveragePower() {
+    var averagePower = powerAverage(30);
+    var iterations = (count / 30);
+
+    if(count % 30 == 0 && averagePower != null) {
+      normalizedPowerTotal += Math.pow(averagePower , 4);
+    }
+
+    if(iterations == 0 || normalizedPowerTotal == 0) {
+      return null;
+    }
+
+    return Math.pow((normalizedPowerTotal / iterations.toFloat()), 0.25);
   }
 }
