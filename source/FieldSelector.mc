@@ -19,8 +19,8 @@ class FieldSelector {
   };
 
   const FIELDS_FOR_MODE = {
-    :descending => [:speed, :distance],
-    :climbing => [:power3s, :power1m, :heartRate, :speed, :distance, :elevationGrade, :cadence, :heading, :altitude, :totalAscent],
+    :descending => [:speed, :elevationGrade, :distance, :power3s, :heartRate, :altitude, :heading, :cadence, :totalAscent],
+    :climbing => [:power3s, :power1m, :heartRate, :elevationGrade, :speed, :distance, :cadence, :heading, :altitude, :totalAscent],
     :stopped => [:distance, :normalizedAveragePower, :averageHeartRate, :averageSpeed, :averageCadence, :maxPower, :totalAscent],
     :flat => [:power3s, :power1m, :heartRate, :speed, :distance, :cadence, :heading, :elevationGrade, :altitude, :totalAscent],
   };
