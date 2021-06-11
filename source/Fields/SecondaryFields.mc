@@ -12,14 +12,14 @@ class SecondaryFields {
     for( var i = 0; i < fields.size(); i++) {
       var valueDimension = dc.getTextDimensions(fields[i].get(:formattedValue), 6);
       var unitDimension = dc.getTextDimensions(fields[i].get(:unit), 0);
-      var labelDimension = dc.getTextDimensions(fields[i].get(:label), 3);
+      var labelDimension = dc.getTextDimensions(fields[i].get(:label), 2);
 
       dc.setColor(Colors.get(fields[i].get(:colors)), -1);
 
       dc.drawText(
         dc.getWidth() * coords[i][0],
-        dc.getHeight() * (coords[i][1] + 0.005),
-        3,
+        dc.getHeight() * (coords[i][1] + 0.01),
+        2,
         fields[i].get(:label),
         1
       );
@@ -28,7 +28,7 @@ class SecondaryFields {
 
       dc.drawText(
         dc.getWidth() * coords[i][0],
-        dc.getHeight() * (coords[i][1] + 0.12) - (labelDimension[1] / 2.0) + (valueDimension[1] / 2.0),
+        dc.getHeight() * (coords[i][1] + 0.105) - (labelDimension[1] / 2.0) + (valueDimension[1] / 2.0),
         6,
         fields[i].get(:formattedValue),
         5
@@ -36,7 +36,7 @@ class SecondaryFields {
 
       dc.drawText(
         dc.getWidth() * (coords[i][0] + 0.01) + (valueDimension[0] / 2.0),
-        dc.getHeight() * (coords[i][1] + 0.07) - (labelDimension[1] / 2.0) + (valueDimension[1]),
+        dc.getHeight() * (coords[i][1] + 0.055) - (labelDimension[1] / 2.0) + (valueDimension[1]),
         0,
         fields[i].get(:unit),
         6
