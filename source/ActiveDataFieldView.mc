@@ -2,17 +2,13 @@ using Toybox.WatchUi as Ui;
 
 class ActiveDataFieldView extends Ui.DataField
 {
-  hidden var batteryPercentage;
-  hidden var clockTime;
-  hidden var elapsedTime;
+  hidden var elapsedTime = 0;
 
   function initialize() {
     DataField.initialize();
   }
 
   function compute(info) {
-    batteryPercentage = System.getSystemStats().battery;
-    clockTime = System.getClockTime();
     elapsedTime = info.elapsedTime;
     Calculator.logInfo(info);
     Calculator.updateMode();
@@ -22,7 +18,7 @@ class ActiveDataFieldView extends Ui.DataField
     Colors.backgroundColor = getBackgroundColor();
     var fieldsSelector = new FieldSelector();
 
-    new StatusField().draw(dc, elapsedTime, clockTime, batteryPercentage);
+    new StatusField().draw(dc, elapsedTime);
     new SecondaryFields().draw(dc, fieldsSelector.secondaryFields());
 
     var mainField = fieldsSelector.mainField();

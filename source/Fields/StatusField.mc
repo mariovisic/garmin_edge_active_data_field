@@ -1,7 +1,8 @@
 class StatusField {
-  function draw(dc, elapsedTime, clockTime, batteryPercentage) {
+  function draw(dc, elapsedTime) {
     dc.setColor(Colors.get([0x000000, 0xffffff]), -1);
 
+    var clockTime = System.getClockTime();
     var clockAmOrPm = clockTime.hour < 12 ? "am" : "pm";
     var clockHour = clockTime.hour % 12 == 0 ? 12 : clockTime.hour % 12;
 
@@ -14,7 +15,7 @@ class StatusField {
       (dc.getWidth() * 0.02),
       (dc.getWidth() * 0.02),
       2,
-      clockHour.format("%2d") + ":" + clockTime.min.format("%02d") + clockAmOrPm + " / " + batteryPercentage.format("%2d") + "%",
+      clockHour.format("%2d") + ":" + clockTime.min.format("%02d") + clockAmOrPm + " / " + System.getSystemStats().battery.format("%2d") + "%",
       2
     );
 
