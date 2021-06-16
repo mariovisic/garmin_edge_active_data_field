@@ -11,7 +11,7 @@ module Calculator {
     :power1m => new [1],
     :normalizedAveragePower => new [1],
     :maxPower => new [1],
-    :cadence => new [1],
+    :cadence => new [3],
     :averageCadence => new [1],
     :distance => new [5],
     :speed => new [3],
@@ -34,7 +34,7 @@ module Calculator {
     logValue(:power1m, powerAverage(60), 1, null);
     logValue(:normalizedAveragePower, normalizedAveragePower(), 1, null);
     logValue(:maxPower, info.maxPower, 1, null);
-    logValue(:cadence, info.currentCadence, 1, null);
+    logValue(:cadence, info.currentCadence, 3, null);
     logValue(:averageCadence, info.averageCadence, 1, null);
     logValue(:distance, info.elapsedDistance, 5, 0.001);
     logValue(:speed, info.currentSpeed, 3, 3.6);
@@ -53,6 +53,8 @@ module Calculator {
   function updateMode() {
     var lastThreeSpeeds = historicalValues.get(:speed).slice(-3, null);
     var lastThreeGradients = historicalValues.get(:elevationGrade).slice(-3, null);
+    var lastThreePowers = historicalValues.get(:power).slice(-3, null);
+    var lastThreeCadences = historicalValues.get(:cadence).slice(-3, null);
 
     if(lastThreeSpeeds[0] == null) { lastThreeSpeeds[0] = 0; }
     if(lastThreeSpeeds[1] == null) { lastThreeSpeeds[1] = 0; }
@@ -76,11 +78,21 @@ module Calculator {
     ) {
       mode = :climbing;
     } else if(
-      lastThreeGradients[0] <= -3
+      (lastThreeGradients[0] <= -3
       && lastThreeGradients[1] <= -3
       && lastThreeGradients[2] <= -3
       // Only show descending mode when at 25km/h
-      && lastThreeSpeeds[0] >= 25
+      && lastThreeSpeeds[0] >= 25) || (
+        lastThreePowers[0] == 0
+        && lastThreePowers[1] == 0
+        && lastThreePowers[2] == 0
+        && lastThreeSpeeds[0] >= 35
+      ) || (
+        lastThreeCadences[0] == 0
+        && lastThreeCadences[1] == 0
+        && lastThreeCadences[2] == 0
+        && lastThreeSpeeds[0] >= 35
+      )
     ) {
       mode = :descending;
     } else {
