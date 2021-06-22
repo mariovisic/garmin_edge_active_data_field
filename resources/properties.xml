@@ -8,7 +8,7 @@
     <strings>
        <string id="ftp_title">FTP</string>
        <string id="max_hr_title">Max heart rate</string>
-       <string id="max_hr_title">24 hour clock</string>
+       <string id="24hr_fmt_title">24 hour clock</string>
     </strings>
 
     <settings>
