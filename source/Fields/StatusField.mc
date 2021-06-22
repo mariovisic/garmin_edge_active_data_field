@@ -3,8 +3,16 @@ class StatusField {
     dc.setColor(Colors.get([0x000000, 0xffffff]), -1);
 
     var clockTime = System.getClockTime();
-    var clockAmOrPm = clockTime.hour < 12 ? "am" : "pm";
-    var clockHour = clockTime.hour % 12 == 0 ? 12 : clockTime.hour % 12;
+    var use24hr =  Toybox.Application.getApp().getProperty("24hr_fmt");
+    var clockHour;
+    var clockAmOrPm = "";
+    if ( use24hr ) {
+            clockHour = clockTime.hour;
+    }
+    else {
+            clockHour = clockTime.hour % 12 == 0 ? 12 : clockTime.hour % 12;
+            clockAmOrPm = clockTime.hour < 12 ? "am" : "pm";
+    }
 
     elapsedTime = elapsedTime / 1000;
     var hours = (elapsedTime / 3600);
