@@ -2,11 +2,13 @@
     <properties>
         <property id="ftp" type="number">200</property>
         <property id="max_hr" type="number">180</property>
+        <property id="24hr_fmt" type="boolean">false</property>
     </properties>
 
     <strings>
        <string id="ftp_title">FTP</string>
        <string id="max_hr_title">Max heart rate</string>
+       <string id="max_hr_title">24 hour clock</string>
     </strings>
 
     <settings>
@@ -16,6 +18,10 @@
 
         <setting propertyKey="@Properties.max_hr" title="@Strings.max_hr_title">
             <settingConfig type="numeric" />
+        </setting>
+
+        <setting propertyKey="@Properties.24hr_fmt" title="@Strings.24hr_fmt_title">
+            <settingConfig type="boolean" />
         </setting>
     </settings>
 </resources>
