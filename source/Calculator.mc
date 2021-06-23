@@ -27,24 +27,24 @@ module Calculator {
 
   function logInfo(info) {
 
-    logValue(:heartRate, info.currentHeartRate, 1, null);
-    logValue(:averageHeartRate, info.averageHeartRate, 1, null);
-    logValue(:power, info.currentPower, 60, null);
-    logValue(:power3s, powerAverage(3), 1, null);
-    logValue(:power1m, powerAverage(60), 1, null);
-    logValue(:normalizedAveragePower, normalizedAveragePower(), 1, null);
-    logValue(:maxPower, info.maxPower, 1, null);
-    logValue(:cadence, info.currentCadence, 3, null);
-    logValue(:averageCadence, info.averageCadence, 1, null);
-    logValue(:distance, info.elapsedDistance, 5, 0.001);
-    logValue(:speed, info.currentSpeed, 3, 3.6);
-    logValue(:averageSpeed, info.averageSpeed, 1, 3.6);
-    logValue(:heading, radiansToHeading(info.currentHeading), 1, null);
-    logValue(:altitude, info.altitude, 5, null);
-    logValue(:totalAscent, info.totalAscent, 1, null);
+    logValue(:heartRate, info.currentHeartRate, 1);
+    logValue(:averageHeartRate, info.averageHeartRate, 1);
+    logValue(:power, info.currentPower, 60);
+    logValue(:power3s, powerAverage(3), 1);
+    logValue(:power1m, powerAverage(60), 1);
+    logValue(:normalizedAveragePower, normalizedAveragePower(), 1);
+    logValue(:maxPower, info.maxPower, 1);
+    logValue(:cadence, info.currentCadence, 3);
+    logValue(:averageCadence, info.averageCadence, 1);
+    logValue(:distance, info.elapsedDistance, 5);
+    logValue(:speed, info.currentSpeed, 3);
+    logValue(:averageSpeed, info.averageSpeed, 1);
+    logValue(:heading, radiansToHeading(info.currentHeading), 1);
+    logValue(:altitude, info.altitude, 5);
+    logValue(:totalAscent, info.totalAscent, 1);
     
     if(mode != :stopped) {
-      logValue(:elevationGrade, elevationGrade(), 3, null);
+      logValue(:elevationGrade, elevationGrade(), 3);
     }
 
     count += 1;
@@ -74,7 +74,7 @@ module Calculator {
       && lastThreeGradients[1] >= 3
       && lastThreeGradients[2] >= 3
       // Only show climbing mode when slower than 20km/h
-      && lastThreeSpeeds[0] < 20
+      && lastThreeSpeeds[0] < (20 / 3.6) // Convert metres/second to km/h
     ) {
       mode = :climbing;
     } else if(
@@ -82,16 +82,16 @@ module Calculator {
       && lastThreeGradients[1] <= -3
       && lastThreeGradients[2] <= -3
       // Only show descending mode when at 25km/h
-      && lastThreeSpeeds[0] >= 25) || (
+      && lastThreeSpeeds[0] >= (25 / 3.6)) || (  // Convert metres/second to km/h
         lastThreePowers[0] == 0
         && lastThreePowers[1] == 0
         && lastThreePowers[2] == 0
-        && lastThreeSpeeds[0] >= 35
+        && lastThreeSpeeds[0] >= (35 / 3.6)  // Convert metres/second to km/h
       ) || (
         lastThreeCadences[0] == 0
         && lastThreeCadences[1] == 0
         && lastThreeCadences[2] == 0
-        && lastThreeSpeeds[0] >= 35
+        && lastThreeSpeeds[0] >= (35 / 3.6)  // Convert metres/second to km/h
       )
     ) {
       mode = :descending;
@@ -100,13 +100,9 @@ module Calculator {
     }
   }
 
-  function logValue(name, value, numValuesToKeep, multiplier) {
+  function logValue(name, value, numValuesToKeep) {
     if (value != null) {
-      if(multiplier == null) {
-        historicalValues.get(name).add(value);
-      } else {
-        historicalValues.get(name).add(value * multiplier);
-      }
+      historicalValues.get(name).add(value);
 
       historicalValues.put(name, historicalValues.get(name).slice(-numValuesToKeep, null));
     }
@@ -116,17 +112,25 @@ module Calculator {
     return historicalValues.get(name).slice(-1, null)[0];
   }
 
-  function getLatestValue(name) {
+  function getLatestValue(name, multiplier) {
     var value = getRawValue(name);
 
-    return value == null ? 0 : value;
+    return value == null ? 0 : multiplyValue(value, multiplier);
   }
 
-  function getLatestFormattedValue(name, format) {
+  function multiplyValue(value, multiplier) {
+    if(value != null && multiplier != null) {
+      return value * multiplier;
+    }
+
+    return value;
+  }
+
+  function getLatestFormattedValue(name, format, multiplier) {
     if(format == null) {
-      return getLatestValue(name);
+      return getLatestValue(name, multiplier);
     } else {
-      var value = getRawValue(name);
+      var value = multiplyValue(getRawValue(name), multiplier);
 
       return value == null ? "---" : value.format(format);
     }
