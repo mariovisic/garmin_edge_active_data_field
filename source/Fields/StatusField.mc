@@ -1,5 +1,3 @@
-import Toybox.System;
-
 class StatusField {
   function draw(dc, elapsedTime) {
     dc.setColor(Colors.get([0x000000, 0xffffff]), -1);
