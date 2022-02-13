@@ -1,5 +1,5 @@
 class FieldSelector {
-  // Color, Label, Unit, Format
+  // Color, Label, Unit, Format, Multiplier
   const FIELD_DATA = {
     :power3s => [[0xAA00FF ], "Power (3s)", "W", "%d", null],
     :power1m => [[0xAA00FF ], "Power (1m)", "W", "%d", null],

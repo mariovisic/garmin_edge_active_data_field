@@ -174,7 +174,7 @@ module Calculator {
       && historicalValues.get(:altitude)[0] != null
       && historicalValues.get(:altitude)[4] != null
     ) {
-      var distance = (historicalValues.get(:distance)[4] - historicalValues.get(:distance)[0]) * 1000;
+      var distance = (historicalValues.get(:distance)[4] - historicalValues.get(:distance)[0]);
       // 7 metres travelled in 5 seconds is around 5km/h, so only calculate grade if we're faster than that :)
       if(distance > 7) {
         var elevationChange = historicalValues.get(:altitude)[4] - historicalValues.get(:altitude)[0];
